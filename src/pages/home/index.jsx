@@ -1,5 +1,6 @@
 import React from "react";
 import Sidenav from "../../components/Sidenav";
+import Table from "../../components/Table";
 import Box from '@mui/material/Box';
 
 const Home = () => {
@@ -9,6 +10,7 @@ const Home = () => {
         <Sidenav />
         <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
           <h1 style={{ marginTop: '50px' }}>Home</h1>
+          <Table />
         </Box>
       </Box>
     </>
