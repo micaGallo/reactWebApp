@@ -1,8 +1,8 @@
 import React from "react";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import Home from "./pages/home";
-import Contact from "./pages/contact";
-import About from "./pages/about";
+import Logout from "./pages/logout";
+import Users from "./pages/users";
 
 export default function App() {
   return (
@@ -10,8 +10,8 @@ export default function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" exact element={<Home />} />
-          <Route path="/about" exact element={<About />} />
-          <Route path="/contact" exact element={<Contact />} />
+          <Route path="/users" exact element={<Users />} />
+          <Route path="/logout" exact element={<Logout />} />
         </Routes>
       </BrowserRouter>
     </>
