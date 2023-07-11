@@ -89,7 +89,7 @@ export default function Sidenav() {
                   alt="profile-user"
                   width="100px"
                   height="100px"
-                  src={`images/petlogo.png`}
+                  src={`/images/petlogo.png`}
                   style={{ cursor: "pointer", borderRadius: "50%" }}
                 />
               </Box>
