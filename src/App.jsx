@@ -1,5 +1,6 @@
 import React from "react";
 import { Routes, Route, BrowserRouter, Navigate } from "react-router-dom";
+import CssBaseline from "@mui/material/CssBaseline";
 import Box from '@mui/material/Box';
 import Sidenav from "./components/Sidenav";
 import Home from "./pages/home";
