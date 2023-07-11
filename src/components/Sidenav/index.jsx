@@ -8,6 +8,8 @@ import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import DashboardIcon from '@mui/icons-material/Dashboard';
+import FeedIcon from '@mui/icons-material/Feed';
+import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
 import GroupIcon from '@mui/icons-material/Group';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
@@ -15,7 +17,6 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import MailIcon from '@mui/icons-material/Mail';
 import Typography from '@mui/material/Typography';
 import {useNavigate} from 'react-router-dom'
 
@@ -123,33 +124,73 @@ export default function Sidenav() {
               </ListItemIcon>
               <ListItemText primary="Dashboard" sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
+            <Divider />
           </ListItem>
-        </List>
-        <Divider />
-        <List>
           <ListItem disablePadding sx={{ display: 'block' }} onClick={()=>{navigate("/users")}}>
-              <ListItemButton
+            <ListItemButton
+              sx={{
+                minHeight: 48,
+                justifyContent: open ? 'initial' : 'center',
+                px: 2.5,
+              }}
+            >
+              <ListItemIcon
                 sx={{
-                  minHeight: 48,
-                  justifyContent: open ? 'initial' : 'center',
-                  px: 2.5,
+                  minWidth: 0,
+                  mr: open ? 3 : 'auto',
+                  justifyContent: 'center',
                 }}
               >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : 'auto',
-                    justifyContent: 'center',
-                  }}
-                >
-                  <GroupIcon />
-                </ListItemIcon>
-                <ListItemText primary="Users" sx={{ opacity: open ? 1 : 0 }} />
-              </ListItemButton>
-            </ListItem>
+                <GroupIcon />
+              </ListItemIcon>
+              <ListItemText primary="Users" sx={{ opacity: open ? 1 : 0 }} />
+            </ListItemButton>
+            <Divider />
+          </ListItem>
+          <ListItem disablePadding sx={{ display: 'block' }} onClick={()=>{navigate("/posts")}}>
+            <ListItemButton
+              sx={{
+                minHeight: 48,
+                justifyContent: open ? 'initial' : 'center',
+                px: 2.5,
+              }}
+            >
+              <ListItemIcon
+                sx={{
+                  minWidth: 0,
+                  mr: open ? 3 : 'auto',
+                  justifyContent: 'center',
+                }}
+              >
+                <FeedIcon />
+              </ListItemIcon>
+              <ListItemText primary="Posts" sx={{ opacity: open ? 1 : 0 }} />
+            </ListItemButton>
+            <Divider />
+          </ListItem>
+          <ListItem disablePadding sx={{ display: 'block' }} onClick={()=>{navigate("/notifications")}}>
+            <ListItemButton
+              sx={{
+                minHeight: 48,
+                justifyContent: open ? 'initial' : 'center',
+                px: 2.5,
+              }}
+            >
+              <ListItemIcon
+                sx={{
+                  minWidth: 0,
+                  mr: open ? 3 : 'auto',
+                  justifyContent: 'center',
+                }}
+              >
+                <NotificationsActiveIcon />
+              </ListItemIcon>
+              <ListItemText primary="Notifications" sx={{ opacity: open ? 1 : 0 }} />
+            </ListItemButton>
+            <Divider />
+          </ListItem>
         </List>
-        <Divider />
-        <div style={{ height: '500px', width: '100%' }}></div>
+        <div style={{ flex: '1 1' }}></div>
         <List>
           <ListItem disablePadding sx={{ display: 'block' }} onClick={()=>{navigate("/logout")}}>
             <ListItemButton

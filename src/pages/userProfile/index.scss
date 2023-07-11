@@ -1,0 +1,30 @@
+.userContainer {
+  grid-column: span 1;
+  background-color: #fff;
+  box-shadow: 0 0 20px rgba(0,0,0,.15);
+  border-radius: 4px;
+  padding: 16px 32px 32px;
+  margin: 12px;
+  text-decoration: none;
+  color: #333;
+}
+
+.itemTitle {
+  margin-bottom: 10px;
+  color: #555;
+}
+
+.detailItem {
+  margin-bottom: 10px;
+  font-size: 14px;
+
+  .itemKey {
+    font-weight: bold;
+    color: gray;
+    margin-right: 5px;
+  }
+
+  .itemValue {
+    font-weight: 300;
+  }
+}
