@@ -6,9 +6,7 @@ import Table from "../../components/Table";
 const PushNotifications = () => {
   return(
     <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-      <div className="datatableTitle">
-        <Header title="PUSH NOTIFICATIONS" subtitle="Managing the push notifications" />
-      </div>
+      <Header title="PUSH NOTIFICATIONS" subtitle="Managing the push notifications" />
       <Table />
     </Box>
   );
