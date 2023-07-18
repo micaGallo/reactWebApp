@@ -6,7 +6,7 @@ import Sidenav from "./components/Sidenav";
 import Home from "./pages/home";
 import Logout from "./pages/logout";
 import Users from "./pages/users";
-import UserProfile from "./pages/userProfile"
+import User from "./pages/user"
 import Posts from "./pages/posts";
 import PushNotifications from "./pages/pushNotifications";
 
@@ -20,7 +20,7 @@ export default function App() {
             <Route path="/" exact element={<Home />} />
             <Route path="/users">
               <Route index element={<Users />} />
-              <Route path=":userId" element={<UserProfile />} />
+              <Route path=":id" element={<User />} />
             </Route>
             <Route path="/posts" exact element={<Posts />} />
             <Route path="/notifications" exact element={<PushNotifications />} />
