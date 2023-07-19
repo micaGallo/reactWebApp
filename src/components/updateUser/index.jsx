@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -7,7 +7,7 @@ import Header from "../../components/Header";
 import TextField from '@mui/material/TextField';
 import "./index.scss";
 
-const UpdateUser = ({user}) => {
+const UpdateUser = ({user, setShow}) => {
   const [updatedAttr, setUpdatedAttr] = useState({
     name: user.name,
     email: user.email,
@@ -19,24 +19,17 @@ const UpdateUser = ({user}) => {
   const handleSave = () => {
 		//llamar be
     console.log(updatedAttr)
+    setShow(false);
 	};
 
   const handleCancel = () => {
-		//HOLA
+    setShow(false);
 	};
-
-  const handleNameChange = (event) => {
-    setUpdatedAttr({ ...updatedAttr, name: event.target.value });
-  };
 
   return(
     <>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-        <div className="titleContainer">
-          <Header title="Update user" />
-          <Button variant="outlined" onClick={handleSave}>Save</Button>
-          <Button variant="outlined" onClick={handleCancel}>Cancel</Button>
-        </div>
+        <Header title="Update user" />
         <div className="container">
           <Grid container>
             <div className="textFieldContainer">
@@ -90,6 +83,10 @@ const UpdateUser = ({user}) => {
               />
             </div>
           </Grid>
+        </div>
+        <div className="buttonContainer">
+          <Button variant="outlined" onClick={handleCancel}>Cancel</Button>
+          <Button variant="contained" onClick={handleSave}>Save changes</Button>
         </div>
       </Box>
     </>

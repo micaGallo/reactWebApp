@@ -92,7 +92,7 @@ const User = () => {
         </Box>
       }
       {
-        show && <UpdateUser user={userData}/>
+        show && <UpdateUser user={userData} setShow={setShow}/>
       }
     </>
   );

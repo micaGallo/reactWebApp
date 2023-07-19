@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import VisibilityIcon from '@mui/icons-material/Visibility';
 import Header from "../../components/Header";
 import Table from "../../components/Table";
 import "./index.scss";
@@ -22,15 +24,9 @@ const Users = () => {
       renderCell: (params) => {
         return (
           <div className="cellAction">
-            <Link to={`/users/${params.row.id}`} style={{ textDecoration: "none" }}>
-              <div className="viewButton">View</div>
-            </Link>
-            <div
-              className="deleteButton"
-              onClick={() => handleDelete(params.row.id)}
-            >
-              Delete
-            </div>
+            <Button variant="outlined" size="small" startIcon={<VisibilityIcon />} href={`/users/${params.row.id}`}>
+              View
+            </Button>
           </div>
         );
       },
