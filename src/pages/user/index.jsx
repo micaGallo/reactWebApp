@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Grid } from "@mui/material";
 import Header from "../../components/Header";
 import "./index.scss";
+import UpdateUser from "../../components/updateUser";
 
 const User = () => {
   const { id } = useParams();
@@ -13,7 +15,6 @@ const User = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    console.log(id);
     const url = 'https://jsonplaceholder.typicode.com/todos/' + id;
 
     fetch(url)
@@ -21,7 +22,6 @@ const User = () => {
         const data = {
           user: {
             name: "John",
-            lastname: "Smith",
             email: "johnsmithe@example.com",
             phone: "123-456-7890",
             mobile: "987-654-3210",
@@ -36,20 +36,26 @@ const User = () => {
       });
   }, [])
 
+  const [show, setShow] = useState(false);
+
+  const handleClick = () => {
+		setShow(true);
+    debugger;
+    console.log(userData)
+	};
+
   return(
     <>
-      { !error && userData && 
+      { !show && !error && userData && 
         <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
           <div className="titleContainer">
             <Header title="User profile" />
-            <Link to="/users/new" className="link">
-              Edit user
-            </Link>
+            <Button variant="outlined" onClick={handleClick}>Edit User</Button>
           </div>
           <div className="container">
             <Grid container>
-              <Grid item xs={3}>Full Name</Grid>
-              <Grid item xs={9} sx={{ color: "#757575" }}>{userData.name} {userData.lastname}</Grid>
+              <Grid item xs={3}>Name</Grid>
+              <Grid item xs={9} sx={{ color: "#757575" }}>{userData.name}</Grid>
               <Box
                 component="span"
                 sx={{ display: "block", width: "100%", borderBottom: "1px solid #c5c5c5", my: 2 }}
@@ -78,12 +84,15 @@ const User = () => {
           </div>
         </Box>
       }
-      { error &&
+      { !show && error &&
         <Box component="main" sx={{ flexGrow: 1, p: 3, textAlign: 'center', fontSize: 'h6.fontSize'}}>
           <Typography style={{ color: '#bf0707' }} variant="body1"> 
             Upss, something wents wrong
           </Typography>
         </Box>
+      }
+      {
+        show && <UpdateUser user={userData}/>
       }
     </>
   );
