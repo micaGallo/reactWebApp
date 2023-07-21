@@ -94,7 +94,7 @@ function EnhancedTableHead(props) {
 }
 
 function EnhancedTableToolbar(props) {
-  const { numSelected, menuItems, selected } = props;
+  const { numSelected, tableTitle, menuItems, selected } = props;
 
   debugger;
   console.log(selected)
@@ -125,7 +125,7 @@ function EnhancedTableToolbar(props) {
           id="tableTitle"
           component="div"
         >
-          Users
+          {tableTitle}
         </Typography>
       )}
       {numSelected > 0 && (
@@ -136,7 +136,7 @@ function EnhancedTableToolbar(props) {
 }
 
 
-export default function EnhancedTable({ menuItems, headCells, rows }) {
+export default function EnhancedTable({ tableTitle, menuItems, headCells, rows, redirectTo}) {
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('id');
   const [selected, setSelected] = React.useState([]);
@@ -213,7 +213,7 @@ export default function EnhancedTable({ menuItems, headCells, rows }) {
   return (
     <Box sx={{ width: '100%' }}>
       <Paper sx={{ width: '100%', mb: 2 }}>
-        <EnhancedTableToolbar numSelected={selected.length} menuItems={menuItems} selected={selected}/>
+        <EnhancedTableToolbar numSelected={selected.length} tableTitle={tableTitle} menuItems={menuItems} selected={selected}/>
         <TableContainer>
           <Table
             sx={{ minWidth: 750 }}
@@ -233,7 +233,14 @@ export default function EnhancedTable({ menuItems, headCells, rows }) {
               {visibleRows.map((row, index) => {
                 const isItemSelected = isSelected(row.id);
                 const labelId = `enhanced-table-checkbox-${index}`;
-
+              
+                const rowValues = [];
+                for (let propiedad in row) {
+                  if (row.hasOwnProperty(propiedad)) {
+                    rowValues.push(row[propiedad]);
+                  }
+                }
+                
                 return (
                   <TableRow
                     hover
@@ -254,19 +261,13 @@ export default function EnhancedTable({ menuItems, headCells, rows }) {
                         }}
                       />
                     </TableCell>
-                    <TableCell
-                      component="th"
-                      id={labelId}
-                      scope="row"
-                    >
-                      {row.id}
-                    </TableCell>
-                    <TableCell>{row.name}</TableCell>
-                    <TableCell>{row.status}</TableCell>
-                    <TableCell>{row.email}</TableCell>
-                    <TableCell>{row.age}</TableCell>
+                   
+                    {rowValues.map((value, index) =>
+                      <TableCell>{value}</TableCell>
+                    )}
+                  
                     <TableCell>
-                      <Button variant="outlined" size="small" startIcon={<VisibilityIcon />} href={`/users/${row.id}`}>
+                      <Button variant="outlined" size="small" startIcon={<VisibilityIcon />} href={`${redirectTo}${row.id}`}>
                         View
                       </Button>
                     </TableCell>

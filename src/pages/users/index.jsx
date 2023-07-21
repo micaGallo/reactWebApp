@@ -1,32 +1,30 @@
 import React from "react";
-import CssBaseline from "@mui/material/CssBaseline";
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Header from "../../components/Header";
-import Table from "../../components/Table";
 import "./index.scss";
 import { headCells, userRows } from "../../helpers/user/datatablesource";
 import SortTable from "../../components/SortTable"
 
 const Users = () => {
   const handleAddUser = () => {
-    console.log("hola");
+    console.log("handleAddUser");
   }
 
   const handleDelete = () => {
-    console.log("hola");
+    console.log("handleDelete");
   };
 
   const handleBlock = () => {
-    console.log("hola");
+    console.log("handleBlock");
   };
 
   const handlePasswordReset = () => {
-    console.log("hola");
+    console.log("handlePasswordReset");
   };
 
   const handleEnableAdmin = (ids) => {
-    console.log("hola");
+    console.log("handleEnableAdmin");
   };
 
   const menuItems = [
@@ -42,7 +40,7 @@ const Users = () => {
         <Header title="TEAM" subtitle="Managing the Team Members" />
         <Button variant="outlined" onClick={handleAddUser}>Add User</Button>
       </div>
-      <SortTable menuItems={menuItems} headCells={headCells} rows={userRows}/>
+      <SortTable tableTitle={"User list"} menuItems={menuItems} headCells={headCells} rows={userRows} redirectTo={"/users/"}/>
     </Box>
   );
 };

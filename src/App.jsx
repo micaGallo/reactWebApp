@@ -8,6 +8,7 @@ import Logout from "./pages/logout";
 import Users from "./pages/users";
 import User from "./pages/user"
 import Posts from "./pages/posts";
+import Post from "./pages/post"
 import PushNotifications from "./pages/pushNotifications";
 
 export default function App() {
@@ -22,7 +23,10 @@ export default function App() {
               <Route index element={<Users />} />
               <Route path=":id" element={<User />} />
             </Route>
-            <Route path="/posts" exact element={<Posts />} />
+            <Route path="/posts">
+              <Route index element={<Posts />} />
+              <Route path=":id" element={<Post />} />
+            </Route>
             <Route path="/notifications" exact element={<PushNotifications />} />
             <Route path="/logout" exact element={<Logout />} />
             <Route path="/*" element={<Navigate to="/" />} />
