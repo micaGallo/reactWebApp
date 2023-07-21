@@ -89,16 +89,13 @@ export default function Sidenav() {
                   alt="profile-user"
                   width="100px"
                   height="100px"
-                  src={`/images/petlogo.png`}
+                  src={"/images/navyseal.png"}
                   style={{ cursor: "pointer", borderRadius: "50%" }}
                 />
               </Box>
               <Box textAlign="center">
                 <Typography variant="h6" fontWeight="bold" color="#141414" sx={{ m: "10px 0 0 0" }}>
-                  Ed Roh
-                </Typography>
-                <Typography variant="h7" color="#683da5">
-                  Admin
+                  Navy SEAL
                 </Typography>
               </Box>
             </Box>

@@ -8,6 +8,7 @@ import { Grid } from "@mui/material";
 import Header from "../../components/Header";
 import "./index.scss";
 import UpdateUser from "../../components/updateUser";
+import Menu from '../../components/Menu';
 
 const User = () => {
   const { id } = useParams();
@@ -44,13 +45,41 @@ const User = () => {
     console.log(userData)
 	};
 
+  const handleDelete = () => {
+    console.log("handleDelete");
+    console.log('user id:', id);
+    console.log('user data',userData)
+  };
+
+  const handleBlock = () => {
+    console.log("handleBlock");
+  };
+
+  const handlePasswordReset = () => {
+    console.log("handlePasswordReset");
+  };
+
+  const handleEnableAdmin = (ids) => {
+    console.log("handleEnableAdmin");
+  };
+
+  const menuItems = [
+    {name: 'Delete', action: handleDelete},
+    {name: 'Block', action: handleBlock},
+    {name: 'Password reset', action: handlePasswordReset},
+    {name: 'Enable admin account', action: handleEnableAdmin},
+  ];
+
   return(
     <>
       { !show && !error && userData && 
         <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
           <div className="titleContainer">
             <Header title="User profile" />
-            <Button variant="outlined" onClick={handleClick}>Edit User</Button>
+            <div className="actionsContainer">
+              <Menu menuItems={menuItems}></Menu>
+              <Button variant="outlined" onClick={handleClick}>Edit User</Button>
+            </div>
           </div>
           <div className="container">
             <Grid container>

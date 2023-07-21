@@ -6,16 +6,15 @@ import Button from '@mui/material/Button';
 import { Grid } from "@mui/material";
 import Header from "../../components/Header";
 import TextField from '@mui/material/TextField';
-import "./index.scss";
 
-const UpdateUser = ({user, setShow}) => {
+const NewUser = () => {
   const form = useForm({
     defaultValues: {
-      name: user.name,
-      email: user.email,
-      phone: user.phone,
-      mobile: user.mobile,
-      address: user.address 
+      name: '',
+      email: '',
+      phone: '',
+      mobile: '',
+      address: ''
     }
   });
 
@@ -23,7 +22,7 @@ const UpdateUser = ({user, setShow}) => {
   const { errors } = formState;
 
   const handleCancel = () => {
-    setShow(false);
+    
 	};
 
   const onSubmit = (data) => {
@@ -34,7 +33,7 @@ const UpdateUser = ({user, setShow}) => {
   return(
     <>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-        <Header title="Update user"/>
+        <Header title="Create user" />
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="container">
             <Grid container>
@@ -114,7 +113,7 @@ const UpdateUser = ({user, setShow}) => {
             </Grid>
           </div>
           <div className="buttonContainer">
-            <Button variant="outlined" onClick={handleCancel}>Cancel</Button>
+            <Button variant="outlined" href={`/users`}>Cancel</Button>
             <Button variant="contained" type="submit">Save changes</Button>
           </div>
         </form>
@@ -123,4 +122,4 @@ const UpdateUser = ({user, setShow}) => {
   );
 };
 
-export default UpdateUser;
+export default NewUser;

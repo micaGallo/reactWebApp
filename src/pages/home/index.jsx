@@ -6,7 +6,7 @@ import Header from "../../components/Header";
 const Home = () => {
   return(
     <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-      <Header title="DASHBOARD" subtitle="Welcome to your dashboard" />
+      <Header title="DASHBOARD"/>
       <Typography paragraph>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Rhoncus dolor purus non

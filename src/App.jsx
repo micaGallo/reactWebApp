@@ -10,6 +10,7 @@ import User from "./pages/user"
 import Posts from "./pages/posts";
 import Post from "./pages/post"
 import PushNotifications from "./pages/pushNotifications";
+import NewUser from "./pages/newUser";
 
 export default function App() {
   return (
@@ -22,6 +23,7 @@ export default function App() {
             <Route path="/users">
               <Route index element={<Users />} />
               <Route path=":id" element={<User />} />
+              <Route path="new" element={<NewUser />} />
             </Route>
             <Route path="/posts">
               <Route index element={<Posts />} />
