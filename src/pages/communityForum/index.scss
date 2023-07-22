@@ -1,0 +1,14 @@
+.boxTitle{
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  .forumTitleContainer{
+    margin-bottom: 10px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+    gap: 20px;
+    margin-bottom: 30px;
+  }
+}

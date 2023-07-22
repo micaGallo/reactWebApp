@@ -2,7 +2,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 
-const Header = ({ title, subtitle }) => {
+const Header = ({ title, subtitle, subtitleColor = "#e6a307" }) => {
   return (
     <Box mb="20px">
       <Typography
@@ -14,7 +14,7 @@ const Header = ({ title, subtitle }) => {
       >
         {title}
       </Typography>
-      <Typography variant="subtitle1" color="#e6a307">
+      <Typography variant="subtitle1" color={subtitleColor}>
         {subtitle}
       </Typography>
     </Box>

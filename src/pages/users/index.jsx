@@ -60,7 +60,7 @@ const Users = () => {
 
   return(
     <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-      <div className="datatableTitle">
+      <div className="userListTitleContainer">
         <Header title="USERS" subtitle="To access more actions, please select one or more users from the list"/>
         <Button variant="outlined" href={`/users/new`}>Add User</Button>
       </div>

@@ -75,7 +75,7 @@ const User = () => {
     <>
       { !show && !error && userData && 
         <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-          <div className="titleContainer">
+          <div className="userTitleContainer">
             <Header title="User profile" />
             <div className="actionsContainer">
               <Menu menuItems={menuItems}></Menu>

@@ -233,9 +233,10 @@ export default function EnhancedTable({ tableTitle, menuItems, headCells, rows, 
                 const labelId = `enhanced-table-checkbox-${index}`;
               
                 const rowValues = [];
-                for (let propiedad in row) {
-                  if (row.hasOwnProperty(propiedad)) {
-                    rowValues.push(row[propiedad]);
+                for (let property in row) {
+                  if (row.hasOwnProperty(property)) {
+                    const value = row[property];
+                    rowValues.push({ property, value });
                   }
                 }
                 
@@ -259,11 +260,22 @@ export default function EnhancedTable({ tableTitle, menuItems, headCells, rows, 
                         }}
                       />
                     </TableCell>
-                   
-                    {rowValues.map((value, index) =>
-                      <TableCell>{value}</TableCell>
-                    )}
-                  
+                    {
+                      rowValues.map((row, index) => (
+                        <TableCell key={index}>
+                          {row.property === 'photo' ||  row.property === 'picture'? (
+                            <img
+                              alt="forum-photo"
+                              width="120px"
+                              height="60px"
+                              src={row.value}
+                            />
+                          ) : (
+                            row.value
+                          )}
+                        </TableCell>
+                      ))
+                    }
                     <TableCell>
                       <Button variant="outlined" size="small" startIcon={<VisibilityIcon />} href={`${redirectTo}${row.id}`}>
                         View

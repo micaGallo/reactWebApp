@@ -7,8 +7,8 @@ import Home from "./pages/home";
 import Logout from "./pages/logout";
 import Users from "./pages/users";
 import User from "./pages/user"
-import Posts from "./pages/posts";
-import Post from "./pages/post"
+import CommunityForums from "./pages/communityForums";
+import CommunityForum from "./pages/communityForum"
 import PushNotifications from "./pages/pushNotifications";
 import NewUser from "./pages/newUser";
 
@@ -25,9 +25,9 @@ export default function App() {
               <Route path=":id" element={<User />} />
               <Route path="new" element={<NewUser />} />
             </Route>
-            <Route path="/posts">
-              <Route index element={<Posts />} />
-              <Route path=":id" element={<Post />} />
+            <Route path="/communityForums">
+              <Route index element={<CommunityForums />} />
+              <Route path=":id" element={<CommunityForum />} />
             </Route>
             <Route path="/notifications" exact element={<PushNotifications />} />
             <Route path="/logout" exact element={<Logout />} />

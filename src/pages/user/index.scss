@@ -1,9 +1,8 @@
-.titleContainer{
+.userTitleContainer{
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin: 0px;
+  align-items: baseline !important;
+  justify-content: space-between !important;
+  margin: 0px !important;
 
   .actionsContainer{
     display: flex;
