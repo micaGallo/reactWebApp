@@ -4,22 +4,27 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import { Grid } from "@mui/material";
 import Header from "../../components/Header";
 import "./index.scss";
 import { headCells, postRows } from "../../helpers/post/datatablesource";
 import SortTable from "../../components/SortTable"
+import NewPost from "../../components/newPost";
 
+const h6Styles = {
+  marginBottom: '15px',
+  fontFamily: "Roboto, Helvetica, Arial, sans-serif",
+  fontWeight: 400,
+  fontSize: '1rem',
+  lineHeight: 1.75,
+  letterSpacing: '0.00938em',
+  color: '#e6a307',
+};
 
 const CommunityForum = () => {
   const { id } = useParams();
   const [postData, setPostData] = useState(null);
   const [forumData, seForumData] = useState(null);
   const [error, setError] = useState(null);
-
-  const handleDelete = () => {
-    console.log("handleDelete forum");
-  };
 
   useEffect(() => {
     const url = 'https://jsonplaceholder.typicode.com/todos/' + id;
@@ -42,17 +47,16 @@ const CommunityForum = () => {
       });
   }, [])
 
-  const handleClick = () => {
-		setShow(true);
-    debugger;
-    console.log(forumData);
-	};
+  //show add post component
+  const [openModal, setOpenModal] = useState(false);
+
+  const handleDelete = (ids) => {
+    console.log("handleDelete posts", ids);
+  };
 
   const menuItems = [
     {name: 'Delete', action: handleDelete},
   ];
-
-  console.log(forumData)
 
   return(
     <>
@@ -69,8 +73,11 @@ const CommunityForum = () => {
               />
               <Header title={forumData.title} subtitle={forumData.description} subtitleColor="#757575"/>
             </div>
-            <Button variant="outlined" href={`/post/new`}>Add Post</Button>
+            <Button variant="outlined" onClick={() => setOpenModal(true)}>Add Post</Button>
           </div>
+          <Typography variant="h6" style={h6Styles}>
+            To access more actions, please select one or more posts from the list
+          </Typography>
           <SortTable tableTitle={"Post list"} menuItems={menuItems} headCells={headCells} rows={postRows} redirectTo={"/posts/"}/>  
         </Box>
       }
@@ -81,6 +88,7 @@ const CommunityForum = () => {
           </Typography>
         </Box>
       }
+      { openModal && <NewPost openModal={openModal} setOpenModal={setOpenModal}/> }
     </>
   );
 };

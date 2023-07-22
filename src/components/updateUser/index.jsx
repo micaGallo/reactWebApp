@@ -22,10 +22,6 @@ const UpdateUser = ({user, setShow}) => {
   const { register, handleSubmit, formState } = form;
   const { errors } = formState;
 
-  const handleCancel = () => {
-    setShow(false);
-	};
-
   const onSubmit = (data) => {
     console.log(data);
     setShow(false);
@@ -114,7 +110,7 @@ const UpdateUser = ({user, setShow}) => {
             </Grid>
           </div>
           <div className="buttonContainer">
-            <Button variant="outlined" onClick={handleCancel}>Cancel</Button>
+            <Button variant="outlined" onClick={() => setShow(false)}>Cancel</Button>
             <Button variant="contained" type="submit">Save changes</Button>
           </div>
         </form>
