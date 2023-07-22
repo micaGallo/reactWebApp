@@ -96,8 +96,6 @@ function EnhancedTableHead(props) {
 function EnhancedTableToolbar(props) {
   const { numSelected, tableTitle, menuItems, selected } = props;
 
-  debugger;
-  console.log(selected)
   return (
     <Toolbar
       sx={{
@@ -129,7 +127,7 @@ function EnhancedTableToolbar(props) {
         </Typography>
       )}
       {numSelected > 0 && (
-        <Menu menuItems={menuItems}></Menu>
+        <Menu menuItems={menuItems} selectedElements={selected}></Menu>
       )}
    </Toolbar>
   );

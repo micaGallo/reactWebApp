@@ -37,6 +37,7 @@ const User = () => {
       });
   }, [])
 
+  //show update component
   const [show, setShow] = useState(false);
 
   const handleClick = () => {
@@ -48,7 +49,7 @@ const User = () => {
   const handleDelete = () => {
     console.log("handleDelete");
     console.log('user id:', id);
-    console.log('user data',userData)
+    console.log('user data',userData);
   };
 
   const handleBlock = () => {

@@ -6,7 +6,7 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 const ITEM_HEIGHT = 48;
 
-export default function MenuItems({menuItems}) {
+export default function MenuItems({menuItems, selectedElements}) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -44,7 +44,7 @@ export default function MenuItems({menuItems}) {
         }}
       >
         {menuItems.map((menuItem) => (
-          <MenuItem key={menuItem.name} selected={menuItem === 'Pyxis'} onClick={menuItem.action}>
+          <MenuItem key={menuItem.name} selected={menuItem === 'Pyxis'} onClick={() => menuItem.action(selectedElements)}>
             {menuItem.name}
           </MenuItem>
         ))}
