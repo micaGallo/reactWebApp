@@ -7,7 +7,7 @@ import Typography from '@mui/material/Typography';
 import { Grid } from "@mui/material";
 import Header from "../../components/Header";
 import "./index.scss";
-import UpdateUser from "../../components/updateUser";
+import UpdateUser from "../../components/UpdateUser";
 import Menu from '../../components/Menu';
 
 const User = () => {
@@ -76,7 +76,7 @@ const User = () => {
       { !show && !error && userData && 
         <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
           <div className="userTitleContainer">
-            <Header title="User profile" />
+            <Header title="USER PROFILE" />
             <div className="actionsContainer">
               <Menu menuItems={menuItems}></Menu>
               <Button variant="outlined" onClick={handleClick}>Edit User</Button>

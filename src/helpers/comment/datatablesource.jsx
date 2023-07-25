@@ -6,10 +6,10 @@ export const headCells = [
       label: 'ID',
     },
     {
-      id: 'title',
+      id: 'author',
       numeric: false,
       disablePadding: false,
-      label: 'Title',
+      label: 'Author',
     },
     {
       id: 'description',
@@ -17,13 +17,28 @@ export const headCells = [
       disablePadding: false,
       label: 'Description',
     },
+    {
+      id: 'replies',
+      numeric: true,
+      disablePadding: false,
+      label: 'Replies',
+    },
+    {
+      id: 'action',
+      numeric: false,
+      disablePadding: false,
+      label: 'Action',
+    }
   ];
   
   export const commentRows = [
     {
-        id: 1,
-        title: "Random comment 1",
-        description: "Life is like a rollercoaster, full of ups and downs, but it's the thrilling ride that makes it worthwhile!",
+      id: 1,
+      author: "Aytor Tilla",
+      authorPicture: "https://cdn.eldestapeweb.com/eldestape/072023/1689894696213/mirtha-legrand---perder-frase-jpeg..webp?cw=770&ch=440&extw=jpeg",
+      authorRole: "Seal",
+      description: "Life is like a rollercoaster, full of ups and downs, but it's the thrilling ride that makes it worthwhile!",
+      repliesAmount: 2,
     },
     {
         id: 2,

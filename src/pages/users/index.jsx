@@ -25,7 +25,6 @@ const Users = () => {
       console.log("confirm")
     };
 
-    debugger;
     return(
       <>
       <h1>Hila</h1>
@@ -61,10 +60,16 @@ const Users = () => {
   return(
     <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
       <div className="userListTitleContainer">
-        <Header title="USERS" subtitle="To access more actions, please select one or more users from the list"/>
+        <Header title="USERS"/>
         <Button variant="outlined" href={`/users/new`}>Add User</Button>
       </div>
-      <SortTable tableTitle={"User list"} menuItems={menuItems} headCells={headCells} rows={userRows} redirectTo={"/users/"}/>
+      <SortTable
+        tableTitle={"To access more actions, please select one or more users"}
+        menuItems={menuItems}
+        headCells={headCells}
+        rows={userRows}
+        redirectTo={"/users/"}
+      />
       {
         false &&
           <Modal

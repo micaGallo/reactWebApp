@@ -2,10 +2,10 @@ import React from "react";
 import Box from '@mui/material/Box';
 import Header from "../../components/Header";
 import "./index.scss";
-import { headCells, communityForumRows } from "../../helpers/communityForum/datatablesource";
+import { headCells, forumRows } from "../../helpers/forum/datatablesource";
 import SortTable from "../../components/SortTable"
 
-const CommunityForums = () => {
+const Forums = () => {
   const handleDelete = () => {
     console.log("handleDelete forms");
   };
@@ -17,12 +17,18 @@ const CommunityForums = () => {
   return(
     <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
       <div className="datatableTitle">
-        <Header title="COMMUNITY FORUM" subtitle="To access more actions, please select one or more forums from the list"/>
+        <Header title="FORUMS"/>
       </div>
-      <SortTable tableTitle={"Forum list"} menuItems={menuItems} headCells={headCells} rows={communityForumRows} redirectTo={"/communityForums/"}/>
+      <SortTable
+        tableTitle={"To access more actions, please select one or more forums"}
+        menuItems={menuItems}
+        headCells={headCells}
+        rows={forumRows}
+        redirectTo={"/forums/"}
+      />
     </Box>
   );
 
 };
 
-export default CommunityForums;
+export default Forums;

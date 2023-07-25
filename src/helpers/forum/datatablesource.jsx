@@ -31,7 +31,7 @@ export const headCells = [
   }
 ];
 
-export const communityForumRows = [
+export const forumRows = [
   {
     id: 1,
     title: "NSF General",

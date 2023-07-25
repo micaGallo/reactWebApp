@@ -7,8 +7,8 @@ import Typography from '@mui/material/Typography';
 import Header from "../../components/Header";
 import "./index.scss";
 import { headCells, postRows } from "../../helpers/post/datatablesource";
-import SortTable from "../../components/SortTable"
-import NewPost from "../../components/newPost";
+import NewPost from "../../components/NewPost";
+import PostTable from "../../components/PostTable";
 
 const h6Styles = {
   marginBottom: '15px',
@@ -20,28 +20,31 @@ const h6Styles = {
   color: '#e6a307',
 };
 
-const CommunityForum = () => {
+const Post = () => {
   const { id } = useParams();
   const [postData, setPostData] = useState(null);
-  const [forumData, seForumData] = useState(null);
   const [error, setError] = useState(null);
 
+  debugger;
   useEffect(() => {
     const url = 'https://jsonplaceholder.typicode.com/todos/' + id;
 
     fetch(url)
       .then((response) => {
         const data = {
-          communityForum: {
-            id: 2,
-            title: "NSF Active Duty Seals",
+          post: {
+            id: 1,
+            author: "Aytor Tilla",
+            authorPicture: "https://cdn.eldestapeweb.com/eldestape/072023/1689894696213/mirtha-legrand---perder-frase-jpeg..webp?cw=770&ch=440&extw=jpeg",
+            authorRole: "Seal",
             description: "Lorem ipsum dolor sit amet",
-            photo: "https://images.unsplash.com/photo-1588001832198-c15cff59b078?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80",
+            commentsAmount: 1,
+            forumId: 2,
           }
         }
         return data;
       }).then((data) => {
-        seForumData(data.communityForum);
+        setPostData(data.post);
       }).catch(error => {
         setError(error);
       });
@@ -60,25 +63,29 @@ const CommunityForum = () => {
 
   return(
     <>
-      { !error && forumData && 
+      { !error && postData && 
         <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-          <div className="boxTitle">
+          <Header title="POST DETAILS"/>
+          <div className="boxTitleForum">
             <div className="forumTitleContainer">
               <img
                 alt="profile-user"
                 width="100px"
                 height="100px"
-                src={forumData.photo}
+                src={postData.authorPicture}
                 style={{ cursor: "pointer", borderRadius: "50%" }}
               />
-              <Header title={forumData.title} subtitle={forumData.description} subtitleColor="#757575"/>
+              <Header title={postData.author} subtitle={postData.authorRole} subtitleColor="#757575"/>
             </div>
-            <Button variant="outlined" onClick={() => setOpenModal(true)}>Add Post</Button>
+            <Button variant="outlined" onClick={() => setOpenModal(true)}>Add Comment</Button>
           </div>
-          <Typography variant="h6" style={h6Styles}>
-            To access more actions, please select one or more posts from the list
-          </Typography>
-          <SortTable tableTitle={"Post list"} menuItems={menuItems} headCells={headCells} rows={postRows} redirectTo={"/posts/"}/>  
+          <PostTable
+            tableTitle={"To access more actions, please select one or more comments"}
+            menuItems={menuItems}
+            headCells={headCells}
+            rows={postRows}
+            redirectTo={`/forums/${postData.forumId}/posts/${postData.id}/comments/`}
+          />  
         </Box>
       }
       { error &&
@@ -93,4 +100,4 @@ const CommunityForum = () => {
   );
 };
 
-export default CommunityForum;
+export default Post;

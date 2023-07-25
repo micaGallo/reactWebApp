@@ -12,28 +12,16 @@ export const headCells = [
       label: 'Author',
     },
     {
-      id: 'picture',
-      numeric: false,
-      disablePadding: false,
-      label: 'Picture',
-    },
-    {
-      id: 'title',
-      numeric: false,
-      disablePadding: false,
-      label: 'Title',
-    },
-    {
       id: 'description',
       numeric: false,
       disablePadding: false,
       label: 'Description',
     },
     {
-      id: 'replies',
+      id: 'comments',
       numeric: true,
       disablePadding: false,
-      label: 'Replies',
+      label: 'Comments',
     },
     {
       id: 'action',
@@ -47,33 +35,33 @@ export const headCells = [
     {
       id: 1,
       author: "Aytor Tilla",
-      picture: "https://cdn.eldestapeweb.com/eldestape/072023/1689894696213/mirtha-legrand---perder-frase-jpeg..webp?cw=770&ch=440&extw=jpeg",
-      title: "Seal",
+      authorPicture: "https://cdn.eldestapeweb.com/eldestape/072023/1689894696213/mirtha-legrand---perder-frase-jpeg..webp?cw=770&ch=440&extw=jpeg",
+      authorRole: "Seal",
       description: "Lorem ipsum dolor sit amet",
-      replies: 1
+      commentsAmount: 1
     },
     {
       id: 2,
       author: "Elba Gina",
-      picture: "https://s1.eestatic.com/2016/12/16/social/memes-humor-redes_sociales_178744040_23538138_1706x960.jpg",
-      title: "Gold Star Significant Other",
+      authorPicture: "https://s1.eestatic.com/2016/12/16/social/memes-humor-redes_sociales_178744040_23538138_1706x960.jpg",
+      authorRole: "Gold Star Significant Other",
       description: "Lorem ipsum dolor sit amet",
-      replies: 4
+      commentsAmount: 4
     },
     {
       id: 3,
       author: "Elber Gudo",
-      picture: "https://marcasregistro.com.ar/wp-content/uploads/2023/01/Moria-Casan.jpg",
-      title: "SWCC Child",
+      authorPicture: "https://marcasregistro.com.ar/wp-content/uploads/2023/01/Moria-Casan.jpg",
+      authorRole: "SWCC Child",
       description: "Lorem ipsum dolor sit amet",
-      replies: 5
+      commentsAmount: 5
     },
     {
       id: 4,
       author: "Ines Esario",
-      picture: "https://i0.wp.com/dubawa.org/wp-content/uploads/2021/08/Michael-Jackson-islmic-song.jpg?fit=1200%2C900&ssl=1",
-      title: "Admin",
+      authorPicture: "https://i0.wp.com/dubawa.org/wp-content/uploads/2021/08/Michael-Jackson-islmic-song.jpg?fit=1200%2C900&ssl=1",
+      authorRole: "Admin",
       description: "Lorem ipsum dolor sit amet",
-      replies: 2
+      commentsAmount: 2
     }
   ];

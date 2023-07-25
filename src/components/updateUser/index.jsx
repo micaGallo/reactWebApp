@@ -4,7 +4,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import { Grid } from "@mui/material";
-import Header from "../../components/Header";
+import Header from "../Header";
 import TextField from '@mui/material/TextField';
 import "./index.scss";
 
@@ -30,7 +30,7 @@ const UpdateUser = ({user, setShow}) => {
   return(
     <>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-        <Header title="Update user"/>
+        <Header title="UPDATE USER"/>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="container">
             <Grid container>

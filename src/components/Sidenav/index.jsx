@@ -144,7 +144,7 @@ export default function Sidenav() {
             </ListItemButton>
             <Divider />
           </ListItem>
-          <ListItem disablePadding sx={{ display: 'block' }} onClick={()=>{navigate("/communityForums")}}>
+          <ListItem disablePadding sx={{ display: 'block' }} onClick={()=>{navigate("/forums")}}>
             <ListItemButton
               sx={{
                 minHeight: 48,
@@ -161,7 +161,7 @@ export default function Sidenav() {
               >
                 <FeedIcon />
               </ListItemIcon>
-              <ListItemText primary="Community Forums" sx={{ opacity: open ? 1 : 0 }} />
+              <ListItemText primary="Forums" sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
             <Divider />
           </ListItem>

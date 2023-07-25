@@ -19,6 +19,8 @@ import { visuallyHidden } from '@mui/utils';
 import Button from '@mui/material/Button';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import Menu from '../Menu';
+import Header from "../../components/Header";
+import "./index.scss";
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -135,7 +137,7 @@ function EnhancedTableToolbar(props) {
 }
 
 
-export default function EnhancedTable({ tableTitle, menuItems, headCells, rows, redirectTo}) {
+export default function PostTable({ tableTitle, menuItems, headCells, rows, redirectTo}) {
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('id');
   const [selected, setSelected] = React.useState([]);
@@ -232,15 +234,7 @@ export default function EnhancedTable({ tableTitle, menuItems, headCells, rows, 
               {visibleRows.map((row, index) => {
                 const isItemSelected = isSelected(row.id);
                 const labelId = `enhanced-table-checkbox-${index}`;
-              
-                const rowValues = [];
-                for (let property in row) {
-                  if (row.hasOwnProperty(property)) {
-                    const value = row[property];
-                    rowValues.push({ property, value });
-                  }
-                }
-                
+
                 return (
                   <TableRow
                     hover
@@ -261,22 +255,34 @@ export default function EnhancedTable({ tableTitle, menuItems, headCells, rows, 
                         }}
                       />
                     </TableCell>
-                    {
-                      rowValues.map((row, index) => (
-                        <TableCell key={index}>
-                          {row.property === 'photo' ||  row.property === 'picture'? (
-                            <img
-                              alt="forum-photo"
-                              width="120px"
-                              height="60px"
-                              src={row.value}
-                            />
-                          ) : (
-                            row.value
-                          )}
-                        </TableCell>
-                      ))
-                    }
+                    <TableCell>
+                      {row.id}
+                    </TableCell>
+                    <TableCell>
+                      <div className="authorContainer">
+                        <img
+                          alt="author-picture"
+                          width="60px"
+                          height="60px"
+                          src={row.authorPicture}
+                          style={{ cursor: "pointer", borderRadius: "50%" }}
+                        />
+                        <Header
+                          title={row.author}
+                          subtitle={row.authorRole}
+                          subtitleColor="#757575"
+                          titleSize='h6'
+                          fontSizeNeeded={false}
+                          subtitleVariant='subtitle2'
+                        />
+                      </div>
+                    </TableCell>
+                    <TableCell>
+                      {row.description}
+                    </TableCell>
+                    <TableCell>
+                      {row.commentsAmount}
+                    </TableCell>
                     <TableCell>
                       <Button variant="outlined" size="small" startIcon={<VisibilityIcon />} href={`${redirectTo}${row.id}`}>
                         View

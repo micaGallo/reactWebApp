@@ -7,10 +7,12 @@ import Home from "./pages/home";
 import Logout from "./pages/logout";
 import Users from "./pages/users";
 import User from "./pages/user"
-import CommunityForums from "./pages/communityForums";
-import CommunityForum from "./pages/communityForum"
+import Forums from "./pages/forums";
+import Forum from "./pages/forum"
 import PushNotifications from "./pages/pushNotifications";
 import NewUser from "./pages/newUser";
+import Post from "./pages/post";
+import Comment from "./pages/comment";
 
 export default function App() {
   return (
@@ -25,10 +27,10 @@ export default function App() {
               <Route path=":id" element={<User />} />
               <Route path="new" element={<NewUser />} />
             </Route>
-            <Route path="/communityForums">
-              <Route index element={<CommunityForums />} />
-              <Route path=":id" element={<CommunityForum />} />
-            </Route>
+            <Route path="/forums" element={<Forums />} />
+            <Route path="/forums/:forumId" element={<Forum />} />
+            <Route path="/forums/:forumId/posts/:postId" element={<Post />} />
+            <Route path="/forums/:forumId/posts/:postId/comments/:commentId" element={<Comment />} />
             <Route path="/notifications" exact element={<PushNotifications />} />
             <Route path="/logout" exact element={<Logout />} />
             <Route path="/*" element={<Navigate to="/" />} />
