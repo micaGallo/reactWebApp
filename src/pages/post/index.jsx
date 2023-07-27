@@ -6,8 +6,8 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Header from "../../components/Header";
 import "./index.scss";
-import { headCells, postRows } from "../../helpers/post/datatablesource";
-import NewPost from "../../components/NewPost";
+import { headCells, commentRows } from "../../helpers/comment/datatablesource";
+import CreateModal from "../../components/CreateModal";
 import PostTable from "../../components/PostTable";
 
 const h6Styles = {
@@ -25,7 +25,6 @@ const Post = () => {
   const [postData, setPostData] = useState(null);
   const [error, setError] = useState(null);
 
-  debugger;
   useEffect(() => {
     const url = 'https://jsonplaceholder.typicode.com/todos/' + id;
 
@@ -38,7 +37,7 @@ const Post = () => {
             authorPicture: "https://cdn.eldestapeweb.com/eldestape/072023/1689894696213/mirtha-legrand---perder-frase-jpeg..webp?cw=770&ch=440&extw=jpeg",
             authorRole: "Seal",
             description: "Lorem ipsum dolor sit amet",
-            commentsAmount: 1,
+            commentsAmount: 5,
             forumId: 2,
           }
         }
@@ -50,11 +49,15 @@ const Post = () => {
       });
   }, [])
 
-  //show add post component
+  //show add comment component
   const [openModal, setOpenModal] = useState(false);
 
+  const handleCreateComment = (data) => {
+    console.log("handleCreateComment", data);
+  };
+
   const handleDelete = (ids) => {
-    console.log("handleDelete posts", ids);
+    console.log("handleDelete comments", ids);
   };
 
   const menuItems = [
@@ -66,16 +69,21 @@ const Post = () => {
       { !error && postData && 
         <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
           <Header title="POST DETAILS"/>
-          <div className="boxTitleForum">
-            <div className="forumTitleContainer">
-              <img
-                alt="profile-user"
-                width="100px"
-                height="100px"
-                src={postData.authorPicture}
-                style={{ cursor: "pointer", borderRadius: "50%" }}
-              />
-              <Header title={postData.author} subtitle={postData.authorRole} subtitleColor="#757575"/>
+          <div className="boxTitlePost">
+            <div>
+              <div className="postTitleContainer">
+                <img
+                  alt="profile-user"
+                  width="100px"
+                  height="100px"
+                  src={postData.authorPicture}
+                  style={{ cursor: "pointer",  borderRadius: "50%", objectFit: "cover"}}
+                />
+                <Header title={postData.author} subtitle={postData.authorRole} subtitleColor="#757575"/>
+              </div>
+              <div className="postDescriptionContainer">
+                <Typography>  {postData.description}  </Typography>
+              </div>
             </div>
             <Button variant="outlined" onClick={() => setOpenModal(true)}>Add Comment</Button>
           </div>
@@ -83,7 +91,7 @@ const Post = () => {
             tableTitle={"To access more actions, please select one or more comments"}
             menuItems={menuItems}
             headCells={headCells}
-            rows={postRows}
+            rows={commentRows}
             redirectTo={`/forums/${postData.forumId}/posts/${postData.id}/comments/`}
           />  
         </Box>
@@ -95,7 +103,7 @@ const Post = () => {
           </Typography>
         </Box>
       }
-      { openModal && <NewPost openModal={openModal} setOpenModal={setOpenModal}/> }
+      { openModal && <CreateModal openModal={openModal} setOpenModal={setOpenModal} onCreateCallback={handleCreateComment} title={"Add a comment"} placeholder={"Write a new comment"}/> }
     </>
   );
 };

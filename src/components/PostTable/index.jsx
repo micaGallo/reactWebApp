@@ -265,7 +265,7 @@ export default function PostTable({ tableTitle, menuItems, headCells, rows, redi
                           width="60px"
                           height="60px"
                           src={row.authorPicture}
-                          style={{ cursor: "pointer", borderRadius: "50%" }}
+                          style={{ cursor: "pointer",  borderRadius: "50%", objectFit: "cover"}}
                         />
                         <Header
                           title={row.author}
@@ -280,14 +280,19 @@ export default function PostTable({ tableTitle, menuItems, headCells, rows, redi
                     <TableCell>
                       {row.description}
                     </TableCell>
-                    <TableCell>
-                      {row.commentsAmount}
-                    </TableCell>
-                    <TableCell>
-                      <Button variant="outlined" size="small" startIcon={<VisibilityIcon />} href={`${redirectTo}${row.id}`}>
-                        View
-                      </Button>
-                    </TableCell>
+                    {row.commentsAmount != undefined  && (
+                      <TableCell>
+                        {row.commentsAmount}
+                      </TableCell>
+                    )}
+                    
+                    {redirectTo != ""  && (
+                       <TableCell>
+                        <Button variant="outlined" size="small" startIcon={<VisibilityIcon />} href={`${redirectTo}${row.id}`}>
+                          View
+                        </Button>
+                     </TableCell>
+                    )}
                   </TableRow>
                 );
               })}

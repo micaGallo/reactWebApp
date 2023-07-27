@@ -38,7 +38,7 @@ export const headCells = [
       authorPicture: "https://cdn.eldestapeweb.com/eldestape/072023/1689894696213/mirtha-legrand---perder-frase-jpeg..webp?cw=770&ch=440&extw=jpeg",
       authorRole: "Seal",
       description: "Lorem ipsum dolor sit amet",
-      commentsAmount: 1
+      commentsAmount: 5
     },
     {
       id: 2,

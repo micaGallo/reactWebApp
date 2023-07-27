@@ -7,7 +7,7 @@ import Typography from '@mui/material/Typography';
 import Header from "../../components/Header";
 import "./index.scss";
 import { headCells, postRows } from "../../helpers/post/datatablesource";
-import NewPost from "../../components/NewPost";
+import CreateModal from "../../components/CreateModal";
 import PostTable from "../../components/PostTable";
 
 const h6Styles = {
@@ -22,7 +22,6 @@ const h6Styles = {
 
 const Forum = () => {
   const { id } = useParams();
-  const [postData, setPostData] = useState(null);
   const [forumData, seForumData] = useState(null);
   const [error, setError] = useState(null);
 
@@ -50,6 +49,10 @@ const Forum = () => {
   //show add post component
   const [openModal, setOpenModal] = useState(false);
 
+  const handleCreatePost = (data) => {
+    console.log("handleCreatePost", data);
+  };
+
   const handleDelete = (ids) => {
     console.log("handleDelete posts", ids);
   };
@@ -70,7 +73,7 @@ const Forum = () => {
                 width="100px"
                 height="100px"
                 src={forumData.photo}
-                style={{ cursor: "pointer", borderRadius: "50%" }}
+                style={{ cursor: "pointer",  borderRadius: "50%", objectFit: "cover"}}
               />
               <Header title={forumData.title} subtitle={forumData.description} subtitleColor="#757575"/>
             </div>
@@ -92,7 +95,7 @@ const Forum = () => {
           </Typography>
         </Box>
       }
-      { openModal && <NewPost openModal={openModal} setOpenModal={setOpenModal}/> }
+      { openModal && <CreateModal openModal={openModal} setOpenModal={setOpenModal} onCreateCallback={handleCreatePost} title={"New post"} placeholder={"Write a new post"}/> }
     </>
   );
 };

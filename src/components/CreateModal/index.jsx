@@ -22,21 +22,21 @@ const style = {
   zindex: 1000000000,
 };
 
-const NewPost = ({openModal, setOpenModal}) => {
+const CreateModal = ({openModal, setOpenModal, onCreateCallback, title, placeholder}) => {
   const form = useForm({
     defaultValues: {
-      title: 'currentUser.role',
-      description: '',
-      picture: 'currentUser.photo',
       author: 'currentUser', //ver como agregarlo
-      replies: 0
+      authorPicture: 'currentUser.photo',
+      authorRole: 'currentUser.role',
+      description: '',
+      commentsAmount: 0
     }
   });
   const { register, handleSubmit, formState } = form;
   const { errors } = formState;
 
   const onSubmit = (data) => {
-    console.log(data);
+    onCreateCallback(data);
   };
 
   return (
@@ -49,12 +49,12 @@ const NewPost = ({openModal, setOpenModal}) => {
       >
         <Box sx={{ ...style, width: 400 }}>
           <form onSubmit={handleSubmit(onSubmit)}>
-            <h2 id="parent-modal-title">New Post</h2>
+            <h2 id="parent-modal-title">{title}</h2>
             <TextField
               id="outlined-multiline-static"
               multiline
               fullWidth
-              placeholder="Write a new post"
+              placeholder={placeholder}
               rows={10}
               {...register('description', {
                 required: 'Description is required'
@@ -73,4 +73,4 @@ const NewPost = ({openModal, setOpenModal}) => {
   );
 };
 
-export default NewPost;
+export default CreateModal;
