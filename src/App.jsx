@@ -13,6 +13,7 @@ import PushNotifications from "./pages/pushNotifications";
 import NewUser from "./pages/newUser";
 import Post from "./pages/post";
 import Comment from "./pages/comment";
+import Cms from "./pages/cms";
 
 export default function App() {
   return (
@@ -32,6 +33,7 @@ export default function App() {
             <Route path="/forums/:forumId/posts/:postId" element={<Post />} />
             <Route path="/forums/:forumId/posts/:postId/comments/:commentId" element={<Comment />} />
             <Route path="/notifications" exact element={<PushNotifications />} />
+            <Route path="/cms" exact element={<Cms />} />
             <Route path="/logout" exact element={<Logout />} />
             <Route path="/*" element={<Navigate to="/" />} />
           </Routes>

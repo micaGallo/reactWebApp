@@ -11,6 +11,7 @@ import DashboardIcon from '@mui/icons-material/Dashboard';
 import FeedIcon from '@mui/icons-material/Feed';
 import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
 import GroupIcon from '@mui/icons-material/Group';
+import EventIcon from '@mui/icons-material/Event';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ListItem from '@mui/material/ListItem';
@@ -183,6 +184,27 @@ export default function Sidenav() {
                 <NotificationsActiveIcon />
               </ListItemIcon>
               <ListItemText primary="Notifications" sx={{ opacity: open ? 1 : 0 }} />
+            </ListItemButton>
+            <Divider />
+          </ListItem>
+          <ListItem disablePadding sx={{ display: 'block' }} onClick={()=>{navigate("/cms")}}>
+            <ListItemButton
+              sx={{
+                minHeight: 48,
+                justifyContent: open ? 'initial' : 'center',
+                px: 2.5,
+              }}
+            >
+              <ListItemIcon
+                sx={{
+                  minWidth: 0,
+                  mr: open ? 3 : 'auto',
+                  justifyContent: 'center',
+                }}
+              >
+                <EventIcon />
+              </ListItemIcon>
+              <ListItemText primary="CMS" sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
             <Divider />
           </ListItem>
