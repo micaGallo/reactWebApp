@@ -7,15 +7,17 @@ import { Grid } from "@mui/material";
 import Header from "../Header";
 import TextField from '@mui/material/TextField';
 import "./index.scss";
+import FormControl from '@mui/material/FormControl';
+import NativeSelect from '@mui/material/NativeSelect';
 
 const UpdateUser = ({user, setShow}) => {
   const form = useForm({
     defaultValues: {
       name: user.name,
+      designation: user.designation,
+      preferredFirstName: user.preferredFirstName,
       email: user.email,
-      phone: user.phone,
-      mobile: user.mobile,
-      address: user.address 
+      picture: user.picture 
     }
   });
 
@@ -44,6 +46,30 @@ const UpdateUser = ({user, setShow}) => {
                   error={!!errors.name}
                   helperText={errors.name?.message}
                 />
+              </div>
+              <div className="textFieldContainer">
+                <Grid item xs={3} id="dropdown-label">Designation</Grid>
+                <FormControl fullWidth>
+                  <NativeSelect
+                    defaultValue={"seal"}
+                    onChange={handleDesignationChange}
+                    inputProps={{
+                      name: 'designation',
+                      id: 'designation',
+                    }}
+                  >
+                    <option value="seal">SEAL</option>
+                    <option value="swcc">SWCC</option>
+                    <option value="sealSpouse">Seal Spouse</option>
+                    <option value="swccSpouse">SWCC Spouse</option>
+                    <option value="swccChild">SWCC Child</option>
+                    <option value="goldStarSpouse">Gold Star Spouse</option>
+                    <option value="goldStarSignificantOther">Gold Star Significant Other</option>
+                    <option value="goldStarChild">Gold Star Child</option>
+                    <option value="goldStarParent">Gold Star Parent</option>
+                    <option value="goldStarSibling">Gold Star Sibling</option>
+                  </NativeSelect>
+                </FormControl>
               </div>
               <div className="textFieldContainer">
                 <Grid item xs={3}>Email</Grid>

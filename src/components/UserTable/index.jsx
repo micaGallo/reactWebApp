@@ -269,6 +269,7 @@ export default function EnhancedTable({ tableTitle, menuItems, headCells, rows, 
                               alt="forum-photo"
                               width="120px"
                               height="60px"
+                              style={{ objectFit: "cover"}}
                               src={row.value}
                             />
                           ) : (

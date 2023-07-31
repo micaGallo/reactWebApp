@@ -22,11 +22,11 @@ const User = () => {
       .then((response) => {
         const data = {
           user: {
-            name: "John",
+            name: "John Lenon",
+            designation: "SEAL",
+            preferredFirstName: "John",
             email: "johnsmithe@example.com",
-            phone: "123-456-7890",
-            mobile: "987-654-3210",
-            address: "123 Main Street, City, Country"
+            picture: "https://cdn.eldestapeweb.com/eldestape/072023/1689894696213/mirtha-legrand---perder-frase-jpeg..webp?cw=770&ch=440&extw=jpeg",
           }
         }
         return data;
@@ -64,6 +64,10 @@ const User = () => {
     console.log("handleEnableAdmin");
   };
 
+  const handleImageError = (event) => {
+    event.target.src = '/ruta-a-la-imagen-por-defecto.jpg'; // Cambia la ruta según tus necesidades.
+  };
+
   const menuItems = [
     {name: 'Delete', action: handleDelete},
     {name: 'Block', action: handleBlock},
@@ -83,6 +87,19 @@ const User = () => {
             </div>
           </div>
           <div className="container">
+              <div className="userPictureContainer">
+                <Box display="block" justifyContent="center" alignItems="center">
+                  <img
+                    alt="profile-user"
+                    width="100px"
+                    height="100px"
+                    src={userData.picture || '/ruta-a-la-imagen-por-defecto.jpg'} // Establece la imagen por defecto directamente en la etiqueta img.
+                    onError={handleImageError} // Se ejecuta si la imagen actual falla al cargar.
+                   
+                    style={{ cursor: "pointer",  borderRadius: "50%", objectFit: "cover"}}
+                  />
+                </Box>
+              </div>
             <Grid container>
               <Grid item xs={3}>Name</Grid>
               <Grid item xs={9} sx={{ color: "#757575" }}>{userData.name}</Grid>
@@ -90,26 +107,20 @@ const User = () => {
                 component="span"
                 sx={{ display: "block", width: "100%", borderBottom: "1px solid #c5c5c5", my: 2 }}
               />
+              <Grid item xs={3}>Designation</Grid>
+              <Grid item xs={9} sx={{ color: "#757575" }}>{userData.designation}</Grid>
+              <Box
+                component="span"
+                sx={{ display: "block", width: "100%", borderBottom: "1px solid #c5c5c5", my: 2 }}
+              />
+              <Grid item xs={3}>Preferred first name</Grid>
+              <Grid item xs={9} sx={{ color: "#757575" }}>{userData.preferredFirstName}</Grid>
+              <Box
+                component="span"
+                sx={{ display: "block", width: "100%", borderBottom: "1px solid #c5c5c5", my: 2 }}
+              />
               <Grid item xs={3}>Email</Grid>
               <Grid item xs={9} sx={{ color: "#757575" }}>{userData.email}</Grid>
-              <Box
-                component="span"
-                sx={{ display: "block", width: "100%", borderBottom: "1px solid #c5c5c5", my: 2 }}
-              />
-              <Grid item xs={3}>Phone</Grid>
-              <Grid item xs={9} sx={{ color: "#757575" }}>{userData.phone}</Grid>
-              <Box
-                component="span"
-                sx={{ display: "block", width: "100%", borderBottom: "1px solid #c5c5c5", my: 2 }}
-              />
-              <Grid item xs={3}>Mobile</Grid>
-              <Grid item xs={9} sx={{ color: "#757575" }}>{userData.mobile}</Grid>
-              <Box
-                component="span"
-                sx={{ display: "block", width: "100%", borderBottom: "1px solid #c5c5c5", my: 2 }}
-              />
-              <Grid item xs={3}>Address</Grid>
-              <Grid item xs={9} sx={{ color: "#757575" }}>{userData.address}</Grid>
             </Grid>
           </div>
         </Box>

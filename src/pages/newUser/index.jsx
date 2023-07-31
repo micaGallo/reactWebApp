@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState} from "react";
 import { useForm } from "react-hook-form";
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from '@mui/material/Box';
@@ -6,28 +6,46 @@ import Button from '@mui/material/Button';
 import { Grid } from "@mui/material";
 import Header from "../../components/Header";
 import TextField from '@mui/material/TextField';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import FormControl from '@mui/material/FormControl';
+import NativeSelect from '@mui/material/NativeSelect';
+import "./index.scss";
 
 const NewUser = () => {
   const form = useForm({
     defaultValues: {
       name: '',
+      designation: '',
+      preferredFirstName: '',
       email: '',
-      phone: '',
-      mobile: '',
-      address: ''
+      picture: ''
     }
   });
 
   const { register, handleSubmit, formState } = form;
   const { errors } = formState;
 
-  const handleCancel = () => {
-    
-	};
+
+  const [selectedDesignationOption, setSelectedDesignationOption] = useState('seal');
+  const [selectedFile, setSelectedFile] = useState(null);
+
+  const handleDesignationChange = (event) => {
+    setSelectedDesignationOption(event.target.value);
+    console.log("handleDesignationChange", selectedDesignationOption);
+  };
+
+
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    setSelectedFile(file);
+    console.log("handleFileChange", selectedFile);
+  };
 
   const onSubmit = (data) => {
-    console.log(data);
-    setShow(false);
+    data.designation = selectedDesignationOption;
+    data.picture = selectedFile;  
+    console.log("onSubmit", data);
+
   };
 
   return(
@@ -49,6 +67,41 @@ const NewUser = () => {
                 />
               </div>
               <div className="textFieldContainer">
+                <Grid item xs={3} id="dropdown-label">Designation</Grid>
+                <FormControl fullWidth>
+                  <NativeSelect
+                    defaultValue={"seal"}
+                    onChange={handleDesignationChange}
+                    inputProps={{
+                      name: 'designation',
+                      id: 'designation',
+                    }}
+                  >
+                    <option value="seal">SEAL</option>
+                    <option value="swcc">SWCC</option>
+                    <option value="sealSpouse">Seal Spouse</option>
+                    <option value="swccSpouse">SWCC Spouse</option>
+                    <option value="swccChild">SWCC Child</option>
+                    <option value="goldStarSpouse">Gold Star Spouse</option>
+                    <option value="goldStarSignificantOther">Gold Star Significant Other</option>
+                    <option value="goldStarChild">Gold Star Child</option>
+                    <option value="goldStarParent">Gold Star Parent</option>
+                    <option value="goldStarSibling">Gold Star Sibling</option>
+                  </NativeSelect>
+                </FormControl>
+              </div>
+              <div className="textFieldContainer">
+                <Grid item xs={3}>Preferred first name</Grid>
+                <TextField
+                  id="preferredFirstName"
+                  variant="standard"
+                  fullWidth
+                  {...register("preferredFirstName", { required: "Preferred first name is required" })}
+                  error={!!errors.preferredFirstName}
+                  helperText={errors.preferredFirstName?.message}
+                />
+              </div>
+              <div className="textFieldContainer">
                 <Grid item xs={3}>Email</Grid>
                 <TextField
                   id="email"
@@ -66,49 +119,20 @@ const NewUser = () => {
                 />
               </div>
               <div className="textFieldContainer">
-                <Grid item xs={3}>Phone</Grid>
-                <TextField
-                  id="phone"
-                  variant="standard"
-                  fullWidth
-                  {...register('phone', {
-                    required: 'Phone is required',
-                    pattern: {
-                      value: /^[0-9]+$/i,
-                      message: 'Invalid phone number format',
-                    },
-                  })}
-                  error={!!errors.mobile}
-                  helperText={errors.mobile?.message}
+                <Grid item xs={2.4}>Picture</Grid>
+                <input
+                  type="file"
+                  id="picture"
+                  onChange={handleFileChange}
+                  accept="image/*"
+                  style={{ display: 'none' }}
                 />
-              </div>
-              <div className="textFieldContainer">
-                <Grid item xs={3}>Mobile</Grid>
-                <TextField
-                  id="mobile"
-                  variant="standard"
-                  fullWidth
-                  {...register('mobile', {
-                    required: 'Mobile is required',
-                    pattern: {
-                      value: /^[0-9]+$/i,
-                      message: 'Invalid phone number format',
-                    },
-                  })}
-                  error={!!errors.mobile}
-                  helperText={errors.mobile?.message}
-                />
-              </div>
-              <div className="textFieldContainer">
-                <Grid item xs={3}>Address</Grid>
-                <TextField
-                  id="address"
-                  variant="standard"
-                  fullWidth
-                  {...register("address", { required: "Address is required" })}
-                  error={!!errors.address}
-                  helperText={errors.address?.message}
-                />
+                <label htmlFor="picture">
+                  <Button variant="outlined" size="small" startIcon={<AccountCircleIcon />}  component="span">
+                    Upload Picture
+                  </Button>
+                </label>
+                {selectedFile && <div className="pictureSelectedContainer">{selectedFile.name}</div>}
               </div>
             </Grid>
           </div>
