@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState} from "react";
 import { useForm } from "react-hook-form";
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from '@mui/material/Box';
@@ -7,6 +7,7 @@ import { Grid } from "@mui/material";
 import Header from "../Header";
 import TextField from '@mui/material/TextField';
 import "./index.scss";
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import FormControl from '@mui/material/FormControl';
 import NativeSelect from '@mui/material/NativeSelect';
 
@@ -24,7 +25,28 @@ const UpdateUser = ({user, setShow}) => {
   const { register, handleSubmit, formState } = form;
   const { errors } = formState;
 
+  const [selectedDesignationOption, setSelectedDesignationOption] = useState('seal');
+  const [selectedFile, setSelectedFile] = useState(null);
+
+  const handleDesignationChange = (event) => {
+    setSelectedDesignationOption(event.target.value);
+    console.log("handleDesignationChange", selectedDesignationOption);
+  };
+
+
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    setSelectedFile(file);
+    console.log("handleFileChange", selectedFile);
+  };
+
+  const handleImageError = (event) => {
+    event.target.src = '/ruta-a-la-imagen-por-defecto.jpg'; // Cambia la ruta según tus necesidades.
+  };
+
   const onSubmit = (data) => {
+    data.designation = selectedDesignationOption;
+    data.picture = selectedFile;  
     console.log(data);
     setShow(false);
   };
@@ -36,6 +58,19 @@ const UpdateUser = ({user, setShow}) => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="container">
             <Grid container>
+              {/* <div className="userPictureContainer">
+                <Box display="block" justifyContent="center" alignItems="center">
+                  <img
+                    id="picture"
+                    alt="profile-user"
+                    width="100px"
+                    height="100px"
+                    src={picture} 
+                    onError={handleImageError} // Se ejecuta si la imagen actual falla al cargar.
+                    style={{ cursor: "pointer",  borderRadius: "50%", objectFit: "cover"}}
+                  />
+                </Box>
+              </div> */}
               <div className="textFieldContainer">
                 <Grid item xs={3}>Name</Grid>
                 <TextField
@@ -72,6 +107,17 @@ const UpdateUser = ({user, setShow}) => {
                 </FormControl>
               </div>
               <div className="textFieldContainer">
+                <Grid item xs={3}>Preferred first name</Grid>
+                <TextField
+                  id="preferredFirstName"
+                  variant="standard"
+                  fullWidth
+                  {...register("preferredFirstName", { required: "Preferred first name is required" })}
+                  error={!!errors.preferredFirstName}
+                  helperText={errors.preferredFirstName?.message}
+                />
+              </div>
+              <div className="textFieldContainer">
                 <Grid item xs={3}>Email</Grid>
                 <TextField
                   id="email"
@@ -89,49 +135,20 @@ const UpdateUser = ({user, setShow}) => {
                 />
               </div>
               <div className="textFieldContainer">
-                <Grid item xs={3}>Phone</Grid>
-                <TextField
-                  id="phone"
-                  variant="standard"
-                  fullWidth
-                  {...register('phone', {
-                    required: 'Phone is required',
-                    pattern: {
-                      value: /^[0-9]+$/i,
-                      message: 'Invalid phone number format',
-                    },
-                  })}
-                  error={!!errors.mobile}
-                  helperText={errors.mobile?.message}
+                <Grid item xs={2.4}>Picture</Grid>
+                <input
+                  type="file"
+                  id="picture"
+                  onChange={handleFileChange}
+                  accept="image/*"
+                  style={{ display: 'none' }}
                 />
-              </div>
-              <div className="textFieldContainer">
-                <Grid item xs={3}>Mobile</Grid>
-                <TextField
-                  id="mobile"
-                  variant="standard"
-                  fullWidth
-                  {...register('mobile', {
-                    required: 'Mobile is required',
-                    pattern: {
-                      value: /^[0-9]+$/i,
-                      message: 'Invalid phone number format',
-                    },
-                  })}
-                  error={!!errors.mobile}
-                  helperText={errors.mobile?.message}
-                />
-              </div>
-              <div className="textFieldContainer">
-                <Grid item xs={3}>Address</Grid>
-                <TextField
-                  id="address"
-                  variant="standard"
-                  fullWidth
-                  {...register("address", { required: "Address is required" })}
-                  error={!!errors.address}
-                  helperText={errors.address?.message}
-                />
+                <label htmlFor="picture">
+                  <Button variant="outlined" size="small" startIcon={<AccountCircleIcon />}  component="span">
+                    Upload Picture
+                  </Button>
+                </label>
+                {selectedFile && <div className="pictureSelectedContainer">{selectedFile.name}</div>}
               </div>
             </Grid>
           </div>

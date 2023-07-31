@@ -6,6 +6,12 @@ export const headCells = [
     label: 'ID',
   },
   {
+    id: 'picture',
+    numeric: false,
+    disablePadding: false,
+    label: '',
+  },
+  {
     id: 'name',
     numeric: false,
     disablePadding: false,
@@ -28,12 +34,6 @@ export const headCells = [
     numeric: false,
     disablePadding: false,
     label: 'Email',
-  },
-  {
-    id: 'picture',
-    numeric: false,
-    disablePadding: false,
-    label: 'Picture',
   },
   {
     id: 'action',

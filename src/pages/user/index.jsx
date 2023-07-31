@@ -87,19 +87,19 @@ const User = () => {
             </div>
           </div>
           <div className="container">
-              <div className="userPictureContainer">
-                <Box display="block" justifyContent="center" alignItems="center">
-                  <img
-                    alt="profile-user"
-                    width="100px"
-                    height="100px"
-                    src={userData.picture || '/ruta-a-la-imagen-por-defecto.jpg'} // Establece la imagen por defecto directamente en la etiqueta img.
-                    onError={handleImageError} // Se ejecuta si la imagen actual falla al cargar.
-                   
-                    style={{ cursor: "pointer",  borderRadius: "50%", objectFit: "cover"}}
-                  />
-                </Box>
-              </div>
+            <div className="userPictureContainer">
+              <Box display="block" justifyContent="center" alignItems="center">
+                <img
+                  alt="profile-user"
+                  width="100px"
+                  height="100px"
+                  src={userData.picture || '/ruta-a-la-imagen-por-defecto.jpg'} // Establece la imagen por defecto directamente en la etiqueta img.
+                  onError={handleImageError} // Se ejecuta si la imagen actual falla al cargar.
+                  
+                  style={{ cursor: "pointer",  borderRadius: "50%", objectFit: "cover"}}
+                />
+              </Box>
+            </div>
             <Grid container>
               <Grid item xs={3}>Name</Grid>
               <Grid item xs={9} sx={{ color: "#757575" }}>{userData.name}</Grid>
