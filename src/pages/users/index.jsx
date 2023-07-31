@@ -4,7 +4,7 @@ import Button from '@mui/material/Button';
 import Header from "../../components/Header";
 import "./index.scss";
 import { headCells, userRows } from "../../helpers/user/datatablesource";
-import SortTable from "../../components/SortTable"
+import Table from "../../components/Table"
 import Modal from '../../components/Modal'
 
 const Users = () => {
@@ -63,7 +63,7 @@ const Users = () => {
         <Header title="USERS"/>
         <Button variant="outlined" href={`/users/new`}>Add User</Button>
       </div>
-      <SortTable
+      <Table
         tableTitle={"To access more actions, please select one or more users"}
         menuItems={menuItems}
         headCells={headCells}

@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import Header from "../../components/Header";
 import "./index.scss";
 import { headCells, forumRows } from "../../helpers/forum/datatablesource";
-import SortTable from "../../components/SortTable"
+import Table from "../../components/Table"
 
 const Forums = () => {
   const handleDelete = () => {
@@ -19,7 +19,7 @@ const Forums = () => {
       <div className="datatableTitle">
         <Header title="FORUMS"/>
       </div>
-      <SortTable
+      <Table
         tableTitle={"To access more actions, please select one or more forums"}
         menuItems={menuItems}
         headCells={headCells}
