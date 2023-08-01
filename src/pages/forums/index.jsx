@@ -6,8 +6,8 @@ import { headCells, forumRows } from "../../helpers/forum/datatablesource";
 import Table from "../../components/Table"
 
 const Forums = () => {
-  const handleDelete = () => {
-    console.log("handleDelete forms");
+  const handleDelete = (ids) => {
+    console.log("handleDelete forms", ids);
   };
 
   const menuItems = [

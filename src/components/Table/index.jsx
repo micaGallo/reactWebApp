@@ -135,7 +135,7 @@ function EnhancedTableToolbar(props) {
 }
 
 
-export default function EnhancedTable({ tableTitle, menuItems, headCells, rows, redirectTo}) {
+export default function EnhancedTable({ tableTitle, menuItems, headCells, rows, redirectTo, hasAction = true}) {
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('id');
   const [selected, setSelected] = React.useState([]);
@@ -278,11 +278,13 @@ export default function EnhancedTable({ tableTitle, menuItems, headCells, rows, 
                         </TableCell>
                       ))
                     }
-                    <TableCell>
-                      <Button variant="outlined" size="small" startIcon={<VisibilityIcon />} href={`${redirectTo}${row.id}`}>
-                        View
-                      </Button>
-                    </TableCell>
+                    { hasAction && (
+                      <TableCell>
+                        <Button variant="outlined" size="small" startIcon={<VisibilityIcon />} href={`${redirectTo}${row.id}`}>
+                          View
+                        </Button>
+                      </TableCell>
+                    )}
                   </TableRow>
                 );
               })}

@@ -14,6 +14,7 @@ import NewUser from "./pages/newUser";
 import Post from "./pages/post";
 import Comment from "./pages/comment";
 import Cms from "./pages/cms";
+import NewPushNotification from "./pages/newPushNotification";
 
 export default function App() {
   return (
@@ -23,17 +24,16 @@ export default function App() {
           <Sidenav />
           <Routes>
             <Route path="/" exact element={<Home />} />
-            <Route path="/users">
-              <Route index element={<Users />} />
-              <Route path=":id" element={<User />} />
-              <Route path="new" element={<NewUser />} />
-            </Route>
+            <Route path="/users" element={<Users />} />
+            <Route path="/users/:id" element={<User />} />
+            <Route path="/users/new" element={<NewUser />} />
             <Route path="/forums" element={<Forums />} />
             <Route path="/forums/:forumId" element={<Forum />} />
             <Route path="/forums/:forumId/posts/:postId" element={<Post />} />
             <Route path="/forums/:forumId/posts/:postId/comments/:commentId" element={<Comment />} />
-            <Route path="/notifications" exact element={<PushNotifications />} />
             <Route path="/cms" exact element={<Cms />} />
+            <Route path="/notifications" exact element={<PushNotifications />} />
+            <Route path="/notifications/new" exact element={<NewPushNotification />} />
             <Route path="/logout" exact element={<Logout />} />
             <Route path="/*" element={<Navigate to="/" />} />
           </Routes>
