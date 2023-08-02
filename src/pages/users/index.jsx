@@ -4,14 +4,8 @@ import Button from '@mui/material/Button';
 import "./index.scss";
 import Header from "../../components/Header";
 import Modal from '../../components/Modal';
-import Table from "../../components/Table";
 import { headCells, userRows } from "../../helpers/user/datatablesource";
-<<<<<<< Updated upstream
 import UserTable from "../../components/UserTable"
-
-import Modal from '../../components/Modal'
-=======
->>>>>>> Stashed changes
 
 const Users = () => {
   //open confirmation modal

@@ -19,7 +19,7 @@ export const headCells = [
   },
   {
     id: 'photo',
-    numeric: true,
+    numeric: false,
     disablePadding: false,
     label: 'Photo',
   },
