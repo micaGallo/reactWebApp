@@ -3,10 +3,7 @@ import { useParams } from "react-router-dom";
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import { Grid } from "@mui/material";
-import Header from "../../components/Header";
 import "./index.scss";
-import Menu from '../../components/Menu';
 
 const Event = () => {
   const { id } = useParams();
@@ -28,6 +25,7 @@ const Event = () => {
             description: "Lorem ipsum dolor sit amet consectetur. Tincidunt morbi pellentesque eget diam...",
             location: "Norfolk, VA",
             ageRange: "N/A",
+            body: "<h1>esto es un titulo</h1><p><br></p><p><br></p><p><em>subtitulo here</em></p><p><br></p><p><br></p><ul><li><strong>chau!</strong></li></ul>",
           }
         }
         return data;
@@ -52,42 +50,7 @@ const Event = () => {
     <>
       { !error && eventData && 
         <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-          <div className="eventTitleContainer">
-            <Header title="EVENT DETAILS" />
-            <Menu menuItems={menuItems}></Menu>
-          </div>
-          <div className="container">
-            <div className="userPictureContainer">
-              <Box display="block" justifyContent="center" alignItems="center">
-                <img
-                  alt="profile-user"
-                  width="300px"
-                  height="300px"
-                  src={eventData.photo || "https://cannamazoo.com/assets/defaults/img/default-product-img.jpg"}
-                  style={{ objectFit: "cover"}}
-                />
-              </Box>
-            </div>
-            <Grid container>
-              <Grid item xs={3}>Title</Grid>
-              <Grid item xs={9} sx={{ color: "#757575" }}>{eventData.title}</Grid>
-         
-              {/* <Grid item xs={3}>Designation</Grid>
-              <Grid item xs={9} sx={{ color: "#757575" }}>{userData.designation}</Grid>
-              <Box
-                component="span"
-                sx={{ display: "block", width: "100%", borderBottom: "1px solid #c5c5c5", my: 2 }}
-              />
-              <Grid item xs={3}>Preferred first name</Grid>
-              <Grid item xs={9} sx={{ color: "#757575" }}>{userData.preferredFirstName}</Grid>
-              <Box
-                component="span"
-                sx={{ display: "block", width: "100%", borderBottom: "1px solid #c5c5c5", my: 2 }}
-              />
-              <Grid item xs={3}>Email</Grid>
-              <Grid item xs={9} sx={{ color: "#757575" }}>{userData.email}</Grid> */}
-            </Grid>
-          </div>
+          {/* <div dangerouslySetInnerHTML={{ __html: eventData.body }} /> */}
         </Box>
       }
       { error &&

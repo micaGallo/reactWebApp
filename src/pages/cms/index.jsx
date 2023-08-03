@@ -1,102 +1,65 @@
 import React, { useState} from "react";
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
-import axios from 'axios';
-import Box from '@mui/material/Box';
+import ReactQuill from 'react-quill'
+import 'quill/dist/quill.snow.css'
 import Header from "../../components/Header";
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import "./index.scss";
 
 const Cms = () => {
   const [editorValue, setEditorValue] = useState('');
 
-  const handleImageUpload = async (file) => {
-    try {
-      const formData = new FormData();
-      formData.append('image', file);
-
-      // Replace 'YOUR_IMAGE_UPLOAD_API_ENDPOINT' with the API endpoint for image upload on your server
-      // const response = await axios.post('YOUR_IMAGE_UPLOAD_API_ENDPOINT', formData);
-  
-      // Replace 'YOUR_IMAGE_URL_PREFIX' with the base URL where your images are hosted
-      // return `${'YOUR_IMAGE_URL_PREFIX'}${response.data.imageUrl}`;
-
-      return file.name;
-    } catch (error) {
-      console.error('Error uploading image:', error);
-      throw error;
-    }
-  };
-
-   // Function to handle image insertion in the editor
-   const handleImageInsert = () => {
-    const input = document.createElement('input');
-    input.setAttribute('type', 'file');
-    input.setAttribute('accept', 'image/*');
-    input.click();
-
-    input.onchange = async () => {
-      const file = input.files[0];
-
-      if (file) {
-        const imageUrl = await handleImageUpload(file);
-        return imageUrl;
-        // this next code is used to position the image, but for this we need the IMAGE that we get from the server..
-        // const range = quillRef.current.getEditor().getSelection();
-        // quillRef.current.getEditor().insertEmbed(range.index, 'image', imageUrl);
-      }
-    };
-  };
-
-  const modules = {
-    toolbar: {
-      container: [
-        ['bold', 'italic', 'underline', 'strike'], // Options for formatting
-        [{ header: [1, 2, 3, 4, 5, 6, false] }], // Headers
-        [{ list: 'ordered' }, { list: 'bullet' }], // Lists
-        [{ align: [] }], // Text alignment
-        ['image'], // Image upload button
-        ['link'], // Link
-        ['clean'], // Remove formatting
+  var modules = {
+    toolbar: [
+      [{ size: ["small", false, "large", "huge"] }],
+      ["bold", "italic", "underline", "strike", "blockquote"],
+      [{ list: "ordered" }, { list: "bullet" }],
+      ["link", "image"],
+      [
+        { list: "ordered" },
+        { list: "bullet" },
+        { indent: "-1" },
+        { indent: "+1" },
+        { align: [] }
       ],
-      handlers: {
-        // image: handleImageInsert, // Attach the image handler to the image button
-      },
-    },
-    // Add other modules you need
+      [{ "color": ["#000000", "#e60000", "#ff9900", "#ffff00", "#008a00", "#0066cc", "#9933ff", "#ffffff", "#facccc", "#ffebcc", "#ffffcc", "#cce8cc", "#cce0f5", "#ebd6ff", "#bbbbbb", "#f06666", "#ffc266", "#ffff66", "#66b966", "#66a3e0", "#c285ff", "#888888", "#a10000", "#b26b00", "#b2b200", "#006100", "#0047b2", "#6b24b2", "#444444", "#5c0000", "#663d00", "#666600", "#003700", "#002966", "#3d1466", 'custom-color'] }],
+    ]
   };
 
-  const formats = [
-    'header',
-    'bold',
-    'italic',
-    'underline',
-    'strike',
-    'blockquote',
-    'list',
-    'bullet',
-    'align',
-    'link',
-    'image', // Enable image format
+  var formats = [
+    "header", "height", "bold", "italic",
+    "underline", "strike", "blockquote",
+    "list", "color", "bullet", "indent",
+    "link", "image", "align", "size",
   ];
 
-  // Function to track changes in the editor content
-  const handleEditorChange = (value) => {
-    debugger;
-    setEditorValue(value);
+  const handleProcedureContentChange = (content) => {
+    console.log("content---->", content);
+    setEditorValue(content);
+
+  };
+
+  const handleCreate = () => {
+    //TODO send to the BE the editorValue
+    console.log("handleCreate", editorValue);
   };
 
   return (
     <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-      <div className="cmsContainer">
+      <div className="titleContainer">
         <Header title="CMS" />
-        <div>
-          <ReactQuill
-            value={editorValue}
-            onChange={handleEditorChange}
-            modules={modules}
-            formats={formats}
-            placeholder="Write something..."
-          />
-        </div>
+        <Button variant="contained" onClick={handleCreate}>Create</Button>
+      </div>
+      <div className="cmsGrid">
+        <ReactQuill
+          theme="snow"
+          modules={modules}
+          formats={formats}
+          placeholder="Write your content ...."
+          onChange={handleProcedureContentChange}
+          style={{ height: "500px" }}
+        >
+        </ReactQuill>
       </div>
     </Box>
   );
