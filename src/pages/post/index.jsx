@@ -76,8 +76,8 @@ const Post = () => {
                   alt="profile-user"
                   width="100px"
                   height="100px"
-                  src={postData.authorPicture}
-                  style={{ cursor: "pointer",  borderRadius: "50%", objectFit: "cover"}}
+                  src={postData.authorPicture || 'https://www.asofiduciarias.org.co/wp-content/uploads/2018/06/sin-foto.png'}
+                  style={{ borderRadius: "50%", objectFit: "cover"}}
                 />
                 <Header title={postData.author} subtitle={postData.authorRole} subtitleColor="#757575"/>
               </div>

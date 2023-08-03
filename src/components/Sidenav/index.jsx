@@ -92,7 +92,7 @@ export default function Sidenav() {
                   width="100px"
                   height="100px"
                   src={"/images/navyseal.png"}
-                  style={{ cursor: "pointer", borderRadius: "50%" }}
+                  style={{ borderRadius: "50%" }}
                 />
               </Box>
               <Box textAlign="center">

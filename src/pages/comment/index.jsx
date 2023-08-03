@@ -75,8 +75,8 @@ const Comment = () => {
                   alt="profile-user"
                   width="100px"
                   height="100px"
-                  src={commentData.authorPicture}
-                  style={{ cursor: "pointer",  borderRadius: "50%", objectFit: "cover"}}
+                  src={commentData.authorPicture || 'https://www.asofiduciarias.org.co/wp-content/uploads/2018/06/sin-foto.png'}
+                  style={{ borderRadius: "50%", objectFit: "cover"}}
                 />
                 <Header title={commentData.author} subtitle={commentData.authorRole} subtitleColor="#757575"/>
               </div>

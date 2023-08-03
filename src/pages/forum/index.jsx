@@ -72,8 +72,8 @@ const Forum = () => {
                 alt="profile-user"
                 width="100px"
                 height="100px"
-                src={forumData.photo}
-                style={{ cursor: "pointer",  borderRadius: "50%", objectFit: "cover"}}
+                src={forumData.photo || "https://cannamazoo.com/assets/defaults/img/default-product-img.jpg"}
+                style={{ borderRadius: "50%", objectFit: "cover"}}
               />
               <Header title={forumData.title} subtitle={forumData.description} subtitleColor="#757575"/>
             </div>

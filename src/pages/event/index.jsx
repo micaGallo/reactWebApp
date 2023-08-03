@@ -44,10 +44,6 @@ const Event = () => {
     console.log('event data', eventData);
   };
 
-  const handleImageError = (event) => {
-    event.target.src = '/ruta-a-la-imagen-por-defecto.jpg'; // Cambia la ruta según tus necesidades.
-  };
-
   const menuItems = [
     {name: 'Delete', action: handleDelete},
   ];
@@ -67,8 +63,7 @@ const Event = () => {
                   alt="profile-user"
                   width="300px"
                   height="300px"
-                  src={eventData.photo || '/ruta-a-la-imagen-por-defecto.jpg'} // Establece la imagen por defecto directamente en la etiqueta img.
-                  onError={handleImageError} // Se ejecuta si la imagen actual falla al cargar.
+                  src={eventData.photo || "https://cannamazoo.com/assets/defaults/img/default-product-img.jpg"}
                   style={{ objectFit: "cover"}}
                 />
               </Box>

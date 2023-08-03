@@ -264,8 +264,8 @@ export default function PostTable({ tableTitle, menuItems, headCells, rows, redi
                           alt="author-picture"
                           width="60px"
                           height="60px"
-                          src={row.authorPicture}
-                          style={{ cursor: "pointer",  borderRadius: "50%", objectFit: "cover"}}
+                          src={row.authorPicture || 'https://www.asofiduciarias.org.co/wp-content/uploads/2018/06/sin-foto.png'}
+                          style={{ borderRadius: "50%", objectFit: "cover"}}
                         />
                         <Header
                           title={row.author}

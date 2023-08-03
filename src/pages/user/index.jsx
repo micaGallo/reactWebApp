@@ -23,7 +23,7 @@ const User = () => {
         const data = {
           user: {
             name: "John Lenon",
-            designation: "SEAL",
+            designation: "SWCC Spouse",
             preferredFirstName: "John",
             email: "johnsmithe@example.com",
             picture: "https://cdn.eldestapeweb.com/eldestape/072023/1689894696213/mirtha-legrand---perder-frase-jpeg..webp?cw=770&ch=440&extw=jpeg",
@@ -64,10 +64,6 @@ const User = () => {
     console.log("handleEnableAdmin");
   };
 
-  const handleImageError = (event) => {
-    event.target.src = '/ruta-a-la-imagen-por-defecto.jpg'; // Cambia la ruta según tus necesidades.
-  };
-
   const menuItems = [
     {name: 'Delete', action: handleDelete},
     {name: 'Block', action: handleBlock},
@@ -91,12 +87,10 @@ const User = () => {
               <Box display="block" justifyContent="center" alignItems="center">
                 <img
                   alt="profile-user"
-                  width="100px"
-                  height="100px"
-                  src={userData.picture || '/ruta-a-la-imagen-por-defecto.jpg'} // Establece la imagen por defecto directamente en la etiqueta img.
-                  onError={handleImageError} // Se ejecuta si la imagen actual falla al cargar.
-                  
-                  style={{ cursor: "pointer",  borderRadius: "50%", objectFit: "cover"}}
+                  width="120px"
+                  height="120px"
+                  src={userData.picture ||'https://www.asofiduciarias.org.co/wp-content/uploads/2018/06/sin-foto.png'}
+                  style={{ borderRadius: "10%", objectFit: "cover"}}
                 />
               </Box>
             </div>

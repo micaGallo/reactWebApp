@@ -270,7 +270,7 @@ export default function EnhancedTable({ tableTitle, menuItems, headCells, rows, 
                               width="120px"
                               height="60px"
                               style={{ objectFit: "cover"}}
-                              src={row.value}
+                              src={row.value || "https://cannamazoo.com/assets/defaults/img/default-product-img.jpg"}
                             />
                           ) : (
                             row.value

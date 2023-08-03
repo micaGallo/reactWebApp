@@ -40,13 +40,9 @@ const UpdateUser = ({user, setShow}) => {
     console.log("handleFileChange", selectedFile);
   };
 
-  const handleImageError = (event) => {
-    event.target.src = '/ruta-a-la-imagen-por-defecto.jpg'; // Cambia la ruta según tus necesidades.
-  };
-
   const onSubmit = (data) => {
     data.designation = selectedDesignationOption;
-    data.picture = selectedFile;  
+    data.picture = selectedFile;
     console.log(data);
     setShow(false);
   };
@@ -58,19 +54,6 @@ const UpdateUser = ({user, setShow}) => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="container">
             <Grid container>
-              {/* <div className="userPictureContainer">
-                <Box display="block" justifyContent="center" alignItems="center">
-                  <img
-                    id="picture"
-                    alt="profile-user"
-                    width="100px"
-                    height="100px"
-                    src={picture} 
-                    onError={handleImageError} // Se ejecuta si la imagen actual falla al cargar.
-                    style={{ cursor: "pointer",  borderRadius: "50%", objectFit: "cover"}}
-                  />
-                </Box>
-              </div> */}
               <div className="textFieldContainer">
                 <Grid item xs={3}>Name</Grid>
                 <TextField
@@ -86,23 +69,23 @@ const UpdateUser = ({user, setShow}) => {
                 <Grid item xs={3} id="dropdown-label">Designation</Grid>
                 <FormControl fullWidth>
                   <NativeSelect
-                    defaultValue={"seal"}
+                    defaultValue={user.designation}
                     onChange={handleDesignationChange}
                     inputProps={{
                       name: 'designation',
                       id: 'designation',
                     }}
                   >
-                    <option value="seal">SEAL</option>
-                    <option value="swcc">SWCC</option>
-                    <option value="sealSpouse">Seal Spouse</option>
-                    <option value="swccSpouse">SWCC Spouse</option>
-                    <option value="swccChild">SWCC Child</option>
-                    <option value="goldStarSpouse">Gold Star Spouse</option>
-                    <option value="goldStarSignificantOther">Gold Star Significant Other</option>
-                    <option value="goldStarChild">Gold Star Child</option>
-                    <option value="goldStarParent">Gold Star Parent</option>
-                    <option value="goldStarSibling">Gold Star Sibling</option>
+                    <option value="SEAL">SEAL</option>
+                    <option value="SWCC">SWCC</option>
+                    <option value="Seal Spouse">Seal Spouse</option>
+                    <option value="SWCC Spouse">SWCC Spouse</option>
+                    <option value="SWCC Child">SWCC Child</option>
+                    <option value="Gold Star Spouse">Gold Star Spouse</option>
+                    <option value="Gold Star Significant Other">Gold Star Significant Other</option>
+                    <option value="Gold Star Child">Gold Star Child</option>
+                    <option value="Gold Star Parent">Gold Star Parent</option>
+                    <option value="Gold Star Sibling">Gold Star Sibling</option>
                   </NativeSelect>
                 </FormControl>
               </div>
