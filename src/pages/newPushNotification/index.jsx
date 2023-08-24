@@ -27,7 +27,7 @@ const NewPushNotification = () => {
   const { errors } = formState;
 
   const handleDateChange = (newValue) => {
-    const formattedDate = newValue ? dayjs(newValue).format('MM/DD/YYYY hh:mm aa') : null;
+    const formattedDate = newValue ? dayjs(newValue).format('MM/DD/YYYY hh:mm a') : null;
     setSelectedDate(formattedDate);
     setShowErrorDate(!selectedDate);
   };

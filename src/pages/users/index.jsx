@@ -42,19 +42,9 @@ const Users = () => {
     console.log("handleBlock", ids);
   };
 
-  const handlePasswordReset = (ids) => {
-    console.log("handlePasswordReset", ids);
-  };
-
-  const handleEnableAdmin = (ids) => {
-    console.log("handleEnableAdmin", ids);
-  };
-
   const menuItems = [
     {name: 'Delete', action: handleDelete},
     {name: 'Block', action: handleBlock},
-    {name: 'Password reset', action: handlePasswordReset},
-    {name: 'Enable admin account', action: handleEnableAdmin},
   ];
 
   return(

@@ -22,6 +22,19 @@ const UpdateUser = ({user, setShow}) => {
     }
   });
 
+  var designationOptions = [
+    { id: 'seal', value: 'SEAL' },
+    { id: 'swcc', value: 'SWCC' },
+    { id: 'sealSpouse', value: 'Seal Spouse' },
+    { id: 'swccSpouse', value: 'SWCC Spouse' },
+    { id: 'swccChild', value: 'SWCC Child' },
+    { id: 'goldStarSpouse', value: 'Gold Star Spouse' },
+    { id: 'goldStarSignificantOther', value: 'Gold Star Significant Other' },
+    { id: 'goldStarChild', value: 'Gold Star Child' },
+    { id: 'goldStarParent', value: 'Gold Star Parent' },
+    { id: 'goldStarSibling', value: 'Gold Star Sibling' }
+  ];
+
   const { register, handleSubmit, formState } = form;
   const { errors } = formState;
 
@@ -76,16 +89,9 @@ const UpdateUser = ({user, setShow}) => {
                       id: 'designation',
                     }}
                   >
-                    <option value="SEAL">SEAL</option>
-                    <option value="SWCC">SWCC</option>
-                    <option value="Seal Spouse">Seal Spouse</option>
-                    <option value="SWCC Spouse">SWCC Spouse</option>
-                    <option value="SWCC Child">SWCC Child</option>
-                    <option value="Gold Star Spouse">Gold Star Spouse</option>
-                    <option value="Gold Star Significant Other">Gold Star Significant Other</option>
-                    <option value="Gold Star Child">Gold Star Child</option>
-                    <option value="Gold Star Parent">Gold Star Parent</option>
-                    <option value="Gold Star Sibling">Gold Star Sibling</option>
+                    {designationOptions.map(option => (
+                      <option key={option.id} value={option.id}>{option.value}</option>
+                    ))}
                   </NativeSelect>
                 </FormControl>
               </div>

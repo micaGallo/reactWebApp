@@ -24,7 +24,7 @@ const Event = () => {
             title: "NSF SPRING FLING AT THE ZOO",
             description: "Lorem ipsum dolor sit amet consectetur. Tincidunt morbi pellentesque eget diam...",
             location: "Norfolk, VA",
-            ageRange: "N/A",
+            ageRestriction: "N/A",
             body: "<h1>esto es un titulo</h1><p><br></p><p><br></p><p><em>subtitulo here</em></p><p><br></p><p><br></p><ul><li><strong>chau!</strong></li></ul>",
           }
         }

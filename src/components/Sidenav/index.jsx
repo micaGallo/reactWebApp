@@ -167,27 +167,6 @@ export default function Sidenav() {
             </ListItemButton>
             <Divider />
           </ListItem>
-          <ListItem disablePadding sx={{ display: 'block' }} onClick={()=>{navigate("/cms")}}>
-            <ListItemButton
-              sx={{
-                minHeight: 48,
-                justifyContent: open ? 'initial' : 'center',
-                px: 2.5,
-              }}
-            >
-              <ListItemIcon
-                sx={{
-                  minWidth: 0,
-                  mr: open ? 3 : 'auto',
-                  justifyContent: 'center',
-                }}
-              >
-                <EditCalendarIcon />
-              </ListItemIcon>
-              <ListItemText primary="CMS" sx={{ opacity: open ? 1 : 0 }} />
-            </ListItemButton>
-            <Divider />
-          </ListItem>
           <ListItem disablePadding sx={{ display: 'block' }} onClick={()=>{navigate("/events")}}>
             <ListItemButton
               sx={{

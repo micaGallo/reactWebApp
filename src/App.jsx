@@ -13,9 +13,9 @@ import PushNotifications from "./pages/pushNotifications";
 import Events from "./pages/events";
 import Event from "./pages/event"
 import NewUser from "./pages/newUser";
+import NewEvent from "./pages/newEvent";
 import Post from "./pages/post";
 import Comment from "./pages/comment";
-import Cms from "./pages/cms";
 import NewPushNotification from "./pages/newPushNotification";
 
 export default function App() {
@@ -33,8 +33,8 @@ export default function App() {
             <Route path="/forums/:forumId" element={<Forum />} />
             <Route path="/forums/:forumId/posts/:postId" element={<Post />} />
             <Route path="/forums/:forumId/posts/:postId/comments/:commentId" element={<Comment />} />
-            <Route path="/cms" exact element={<Cms />} />
             <Route path="/events" exact element={<Events />} />
+            <Route path="/events/new" element={<NewEvent />} />
             <Route path="/events/:eventId" element={<Event />} />
             <Route path="/notifications" exact element={<PushNotifications />} />
             <Route path="/notifications/new" exact element={<NewPushNotification />} />
