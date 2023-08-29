@@ -54,6 +54,12 @@ export const headCells = [
     label: 'Is registrable',
   },
   {
+    id: 'registrableLink',
+    numeric: false,
+    disablePadding: false,
+    label: 'Registrable link',
+  },
+  {
     id: 'ageRestriction',
     numeric: false,
     disablePadding: false,
@@ -73,11 +79,12 @@ export const eventRows = [
     photo: "https://eventbrite-s3.s3.amazonaws.com/marketing/landingpages/assets/2023/organizer/a_organizer_event--creator-eventbrite-.jpeg",
     startDate: "SUN. APR 23",
     endDate: "SUN. APR 23",
-    eventType: "COMMUNITY EVENT",
+    eventType: "COMMUNITY",
     title: "NSF SPRING FLING AT THE ZOO",
     description: "Lorem ipsum dolor sit amet consectetur. Tincidunt morbi pellentesque eget diam...",
     location: "Norfolk, VA",
     isRegistrable: "No",
+    registrableLink: "N/A",
     ageRestriction: "N/A",
   },
   {
@@ -85,11 +92,12 @@ export const eventRows = [
     photo: "https://www.aleitevents.com/wp-content/uploads/2019/02/ABCF1-19-scaled.jpg",
     startDate: "MON. APR 23",
     endDate: "TUE. APR 24",
-    eventType: "FUNDRAISING EVENT",
+    eventType: "FUNDRAISING",
     title: "DALLAS evening of tribute",
     description: "Lorem ipsum dolor sit amet consectetur. Tincidunt morbi pellentesque eget diam...",
     location: "Dallas, TX",
     isRegistrable: "Yes",
+    registrableLink: "https://i.guim.co.uk/img/media/b60a4e5fed7d577aaaae08c2f194ad432732b073/0_0_5333_3200/master/5333.jpg?width=620&dpr=2&s=none",
     ageRestriction: "N/A",
   },
   {
@@ -102,6 +110,7 @@ export const eventRows = [
     description: "Lorem ipsum dolor sit amet consectetur. Tincidunt morbi pellentesque eget diam...",
     location: "Eastern Shore, VA",
     isRegistrable: "Yes",
+    registrableLink: "https://i.guim.co.uk/img/media/b60a4e5fed7d577aaaae08c2f194ad432732b073/0_0_5333_3200/master/5333.jpg?width=620&dpr=2&s=none",
     ageRestriction: "14-17 yrs",
   },
 ];

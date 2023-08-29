@@ -1,17 +1,32 @@
 import React, { useState} from "react";
 import { useForm } from "react-hook-form";
 import CssBaseline from "@mui/material/CssBaseline";
-import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import { Grid, Typography } from "@mui/material";
-import Header from "../../components/Header";
 import TextField from '@mui/material/TextField';
+import Box from '@mui/material/Box';
+import Modal from '@mui/material/Modal';
+import "./index.scss";
+import { Grid, Typography } from "@mui/material";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 import dayjs from 'dayjs';
 
-const NewPushNotification = () => {
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  pt: 2,
+  px: 4,
+  pb: 3,
+  zindex: 1000000000,
+};
+
+const CreateEventReminderModal = ({openModal, setOpenModal, onSaveChangesCallback}) => {
   const [selectedDate, setSelectedDate] = useState(null);
   const [showErrorDate, setShowErrorDate] = useState(false);
 
@@ -36,18 +51,24 @@ const NewPushNotification = () => {
     if(selectedDate){
       setShowErrorDate(false);
       data.date = selectedDate;  
+      onSaveChangesCallback(data);
       console.log("onSubmit", data);
     }else{
       setShowErrorDate(true);
     }
   };
 
-  return(
-    <>
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-        <Header title="Create push notification" />
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="container">
+  return (
+    <React.Fragment>
+      <Modal
+        open={openModal}
+        onClose={() => setOpenModal(false)}
+        aria-labelledby="parent-modal-title"
+        aria-describedby="parent-modal-description"
+      >
+        <Box sx={{ ...style, width: 600 }}>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <h2 id="parent-modal-title">Create event reminder</h2>
             <Grid container>
               <div className="textFieldContainer">
                 <Grid item xs={3}>Title</Grid>
@@ -66,7 +87,7 @@ const NewPushNotification = () => {
                   id="message"
                   variant="standard"
                   fullWidth
-                  {...register("message", { required: "Message first name is required" })}
+                  {...register("message", { required: "Message is required" })}
                   error={!!errors.message}
                   helperText={errors.message?.message}
                 />
@@ -85,15 +106,15 @@ const NewPushNotification = () => {
                 </div>
               </div>
             </Grid>
-          </div>
-          <div className="buttonContainer">
-            <Button variant="outlined" href={`/notifications`}>Cancel</Button>
-            <Button variant="contained" type="submit">Save changes</Button>
-          </div>
-        </form>
-      </Box>
-    </>
+            <div className="postButtonContainer">
+              <Button variant="outlined" onClick={() => setOpenModal(false)}>Cancel</Button>
+              <Button variant="contained" type="submit">Save changes</Button>
+            </div>
+          </form>
+        </Box>
+      </Modal>
+    </React.Fragment>
   );
 };
 
-export default NewPushNotification;
+export default CreateEventReminderModal;

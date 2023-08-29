@@ -16,21 +16,24 @@ import { FormControl, FormControlLabel, Radio, RadioGroup, Grid, Typography } fr
 import ReactQuill from 'react-quill'
 import 'quill/dist/quill.snow.css'
 
-const NewEvent = () => {
+const UpdateEvent = ({event, setShow}) => {
+  
+
   const form = useForm({
     defaultValues: {
-      photo: '',
-      startDate: '',
-      endDate: '',
-      eventType: '',
-      title: '',
-      description: '',
-      location: '',
-      isRegistrable: '',
-      registrableLink:'',
-      ageRestriction: '',
+      photo: event.photo,
+      startDate: event.startDate,
+      endDate: event.endDate,
+      eventType: event.eventType,
+      title: event.title,
+      description: event.description,
+      location: event.location,
+      isRegistrable: event.isRegistrable,
+      registrableLink: event.registrableLink,
+      ageRestriction: event.ageRestriction,
     }
   });
+  
   const { register, handleSubmit, formState } = form;
   const { errors } = formState;
   
@@ -66,10 +69,11 @@ const NewEvent = () => {
     "link", "image", "align", "size",
   ];
 
-  const [selectedEventTypeOption, setSelectedEventTypeOption] = useState('camp');
-  const [isRegistrable, setRegistrable] = useState(false);
+  //TODO: the default value of setSelectedEventTypeOption should be just event.eventType
+  const [selectedEventTypeOption, setSelectedEventTypeOption] = useState(eventTypeOptions.find(option => option.value === event.eventType).id);
+  const [isRegistrable, setRegistrable] = useState(event.isRegistrable == "Yes");
   const [selectedFile, setSelectedFile] = useState(null);
-  const [description, setDescription] = useState('');
+  const [description, setDescription] = useState(event.description);
   const [selectedStartDate, setSelectedStartDate] = useState(null);
   const [selectedEndDate, setSelectedEndDate] = useState(null);
   const [showErrorStartDate, setShowErrorStartDate] = useState(false);
@@ -77,13 +81,15 @@ const NewEvent = () => {
 
 
   const handleStartDateChange = (newValue) => {
-    const formattedDate = newValue ? dayjs(newValue).format('MM/DD/YYYY hh:mm a') : null;
+    debugger;
+    console.log(newValue)
+    const formattedDate = newValue ? dayjs(newValue) : null;
     setSelectedStartDate(formattedDate);
     setShowErrorStartDate(!setSelectedStartDate);
   };
 
   const handleEndDateChange = (newValue) => {
-    const formattedDate = newValue ? dayjs(newValue).format('MM/DD/YYYY hh:mm a') : null;
+    const formattedDate = newValue ? dayjs(newValue) : null;
     setSelectedEndDate(formattedDate);
     setShowErrorEndDate(!setSelectedEndDate);
   };
@@ -135,7 +141,7 @@ const NewEvent = () => {
   return(
     <>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-        <Header title="Create event" />
+        <Header title="UPDATE EVENT" />
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="container">
             <Grid container>
@@ -176,7 +182,7 @@ const NewEvent = () => {
                 <Grid item xs={3} id="dropdown-label">Type</Grid>
                 <FormControl fullWidth>
                   <NativeSelect
-                    defaultValue={"camp"}
+                    defaultValue={selectedEventTypeOption}
                     onChange={handleEventTypeChange}
                     inputProps={{
                       name: 'type',
@@ -193,7 +199,7 @@ const NewEvent = () => {
                 <Grid item xs={2.4}>Start date</Grid>
                 <div style={{ display: 'flex', flexDirection: 'column' }}>
                   <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <DateTimePicker value={selectedStartDate} onChange={handleStartDateChange}/>
+                    <DateTimePicker value={selectedStartDate || dayjs(event.selectedStartDate)} onChange={handleStartDateChange}/>
                   </LocalizationProvider>
                   {showErrorStartDate && (
                     <Typography style={{ color: '#d32f2f' }} variant="caption">
@@ -206,7 +212,7 @@ const NewEvent = () => {
                 <Grid item xs={2.4}>End date</Grid>
                 <div style={{ display: 'flex', flexDirection: 'column' }}>
                   <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <DateTimePicker value={selectedEndDate} onChange={handleEndDateChange}/>
+                    <DateTimePicker value={selectedEndDate || dayjs(event.selectedEndDate)} onChange={handleEndDateChange}/>
                   </LocalizationProvider>
                   {showErrorEndDate && (
                     <Typography style={{ color: '#d32f2f' }} variant="caption">
@@ -269,7 +275,7 @@ const NewEvent = () => {
                       theme="snow"
                       modules={modules}
                       formats={formats}
-                      placeholder="Write your content ...."
+                      value={description}
                       onChange={handleDescriptionChange}
                       style={{ height: "500px" }}
                     >
@@ -282,7 +288,7 @@ const NewEvent = () => {
             </Grid>
           </div>
           <div className="buttonContainer">
-            <Button variant="outlined" href={`/events`}>Cancel</Button>
+            <Button variant="outlined" onClick={() => setShow(false)}>Cancel</Button>
             <Button variant="contained" type="submit">Save changes</Button>
           </div>
         </form>
@@ -291,4 +297,4 @@ const NewEvent = () => {
   );
 };
 
-export default NewEvent;
+export default UpdateEvent;

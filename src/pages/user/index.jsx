@@ -40,7 +40,7 @@ const User = () => {
   //show update component
   const [show, setShow] = useState(false);
 
-  const handleClick = () => {
+  const handleEdit = () => {
 		setShow(true);
     debugger;
     console.log(userData)
@@ -79,7 +79,7 @@ const User = () => {
             <Header title="USER PROFILE" />
             <div className="actionsContainer">
               <Menu menuItems={menuItems}></Menu>
-              <Button variant="outlined" onClick={handleClick}>Edit User</Button>
+              <Button variant="outlined" onClick={handleEdit}>Edit User</Button>
             </div>
           </div>
           <div className="container">

@@ -16,7 +16,6 @@ import NewUser from "./pages/newUser";
 import NewEvent from "./pages/newEvent";
 import Post from "./pages/post";
 import Comment from "./pages/comment";
-import NewPushNotification from "./pages/newPushNotification";
 
 export default function App() {
   return (
@@ -37,7 +36,6 @@ export default function App() {
             <Route path="/events/new" element={<NewEvent />} />
             <Route path="/events/:eventId" element={<Event />} />
             <Route path="/notifications" exact element={<PushNotifications />} />
-            <Route path="/notifications/new" exact element={<NewPushNotification />} />
             <Route path="/logout" exact element={<Logout />} />
             <Route path="/*" element={<Navigate to="/" />} />
           </Routes>

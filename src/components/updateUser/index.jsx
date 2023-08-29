@@ -38,7 +38,7 @@ const UpdateUser = ({user, setShow}) => {
   const { register, handleSubmit, formState } = form;
   const { errors } = formState;
 
-  const [selectedDesignationOption, setSelectedDesignationOption] = useState('seal');
+  const [selectedDesignationOption, setSelectedDesignationOption] = useState(designationOptions.find(option => option.value === user.designation).id);
   const [selectedFile, setSelectedFile] = useState(null);
 
   const handleDesignationChange = (event) => {
@@ -82,7 +82,7 @@ const UpdateUser = ({user, setShow}) => {
                 <Grid item xs={3} id="dropdown-label">Designation</Grid>
                 <FormControl fullWidth>
                   <NativeSelect
-                    defaultValue={user.designation}
+                    defaultValue={selectedDesignationOption}
                     onChange={handleDesignationChange}
                     inputProps={{
                       name: 'designation',

@@ -1,6 +1,5 @@
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import "./index.scss";
 import Header from "../../components/Header";
 import Table from "../../components/Table"
@@ -19,7 +18,6 @@ const PushNotifications = () => {
     <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
       <div className="notificationstTitleContainer">
         <Header title="PUSH NOTIFICATIONS"/>
-        <Button variant="outlined" href={`/notifications/new`}>Add notification</Button>
       </div>
       <Table
         tableTitle={"To access more actions, please select one or more notifications"}
