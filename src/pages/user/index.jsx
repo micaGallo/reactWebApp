@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import CssBaseline from "@mui/material/CssBaseline";
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import { Grid } from "@mui/material";
+import { Grid, Box, Button} from "@mui/material";
 import Header from "../../components/Header";
-import "./index.scss";
 import UpdateUser from "../../components/UpdateUser";
 import Menu from '../../components/Menu';
+import ErrorMessage from '../../components/ErrorMessage';
+import DataDetailsItem from '../../components/DataDetailsItem';
+import DataDetailsPicture from '../../components/DataDetailsPicture';
+import "./index.scss";
 
 const User = () => {
   const { id } = useParams();
   const [userData, setUserData] = useState(null);
   const [error, setError] = useState(null);
+  const [showEditModal, setShowEditModal] = useState(false);
 
   useEffect(() => {
     const url = 'https://jsonplaceholder.typicode.com/todos/' + id;
@@ -37,11 +37,8 @@ const User = () => {
       });
   }, [])
 
-  //show update component
-  const [show, setShow] = useState(false);
-
   const handleEdit = () => {
-		setShow(true);
+		setShowEditModal(true);
     debugger;
     console.log(userData)
 	};
@@ -73,7 +70,7 @@ const User = () => {
 
   return(
     <>
-      { !show && !error && userData && 
+      { !showEditModal && !error && userData && 
         <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
           <div className="userTitleContainer">
             <Header title="USER PROFILE" />
@@ -84,50 +81,22 @@ const User = () => {
           </div>
           <div className="container">
             <div className="userPictureContainer">
-              <Box display="block" justifyContent="center" alignItems="center">
-                <img
-                  alt="profile-user"
-                  width="120px"
-                  height="120px"
-                  src={userData.picture ||'https://www.asofiduciarias.org.co/wp-content/uploads/2018/06/sin-foto.png'}
-                  style={{ borderRadius: "10%", objectFit: "cover"}}
-                />
-              </Box>
+              <DataDetailsPicture pictureUrl={userData.picture} defaultPictureUrl={'https://www.asofiduciarias.org.co/wp-content/uploads/2018/06/sin-foto.png'}/>
             </div>
             <Grid container>
-              <Grid item xs={3}>Name</Grid>
-              <Grid item xs={9} sx={{ color: "#757575" }}>{userData.name}</Grid>
-              <Box
-                component="span"
-                sx={{ display: "block", width: "100%", borderBottom: "1px solid #c5c5c5", my: 2 }}
-              />
-              <Grid item xs={3}>Designation</Grid>
-              <Grid item xs={9} sx={{ color: "#757575" }}>{userData.designation}</Grid>
-              <Box
-                component="span"
-                sx={{ display: "block", width: "100%", borderBottom: "1px solid #c5c5c5", my: 2 }}
-              />
-              <Grid item xs={3}>Preferred first name</Grid>
-              <Grid item xs={9} sx={{ color: "#757575" }}>{userData.preferredFirstName}</Grid>
-              <Box
-                component="span"
-                sx={{ display: "block", width: "100%", borderBottom: "1px solid #c5c5c5", my: 2 }}
-              />
-              <Grid item xs={3}>Email</Grid>
-              <Grid item xs={9} sx={{ color: "#757575" }}>{userData.email}</Grid>
+              <DataDetailsItem title={"Name"} value={userData.name}/>
+              <DataDetailsItem title={"Designation"} value={userData.designation}/>
+              <DataDetailsItem title={"Preferred first name"} value={userData.preferredFirstName}/>
+              <DataDetailsItem title={"Email"} value={userData.email} showSeparator={false}/>
             </Grid>
           </div>
         </Box>
       }
-      { !show && error &&
-        <Box component="main" sx={{ flexGrow: 1, p: 3, textAlign: 'center', fontSize: 'h6.fontSize'}}>
-          <Typography style={{ color: '#bf0707' }} variant="body1"> 
-            Upss, something wents wrong
-          </Typography>
-        </Box>
+      { 
+        !showEditModal && error && <ErrorMessage/>
       }
       {
-        show && <UpdateUser user={userData} setShow={setShow}/>
+        showEditModal && <UpdateUser user={userData} setShow={setShowEditModal}/>
       }
     </>
   );

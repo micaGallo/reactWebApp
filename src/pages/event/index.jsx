@@ -1,20 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import CssBaseline from "@mui/material/CssBaseline";
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import { Grid } from "@mui/material";
+import { Grid, Box, Button} from "@mui/material";
 import Header from "../../components/Header";
 import Menu from '../../components/Menu';
-import "./index.scss";
 import CreateEventReminderModal from "../../components/CreateEventReminderModal";
 import UpdateEvent from "../../components/UpdateEvent";
+import DataDetailsItem from '../../components/DataDetailsItem';
+import DataDetailsPicture from '../../components/DataDetailsPicture';
+import "./index.scss";
 
 const Event = () => {
   const { id } = useParams();
   const [eventData, setEventData] = useState(null);
   const [error, setError] = useState(null);
+  const [showEditModal, setShowEditModal] = useState(false);
 
   useEffect(() => {
     const url = 'https://jsonplaceholder.typicode.com/todos/' + id;
@@ -44,14 +43,10 @@ const Event = () => {
       });
   }, [])
 
-   //show update component
-   const [showEditEvent, setShowEditEvent] = useState(false);
-
   const [openCreateReminderModal, setOpenCreateReminderModal] = useState(false);
 
   const handleEdit= () => {
-    setShowEditEvent(true);
-    debugger;
+    setShowEditModal(true);
     console.log(eventData)
   };
 
@@ -77,7 +72,7 @@ const Event = () => {
 
   return(
     <>
-      { !showEditEvent && !error && eventData && 
+      { !showEditModal && !error && eventData && 
         <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
           <div className="userTitleContainer">
             <Header title="EVENT DETAILS" />
@@ -88,62 +83,17 @@ const Event = () => {
           </div>
           <div className="container">
             <div className="userPictureContainer">
-              <Box display="block" justifyContent="center" alignItems="center">
-                <img
-                  alt="profile-user"
-                  width="120px"
-                  height="120px"
-                  src={eventData.photo ||'https://www.asofiduciarias.org.co/wp-content/uploads/2018/06/sin-foto.png'}
-                  style={{ borderRadius: "10%", objectFit: "cover"}}
-                />
-              </Box>
+              <DataDetailsPicture pictureUrl={eventData.photo} defaultPictureUrl={'https://www.asofiduciarias.org.co/wp-content/uploads/2018/06/sin-foto.png'}/>
             </div>
             <Grid container>
-              <Grid item xs={3}>Title</Grid>
-              <Grid item xs={9} sx={{ color: "#757575" }}>{eventData.title}</Grid>
-              <Box
-                component="span"
-                sx={{ display: "block", width: "100%", borderBottom: "1px solid #c5c5c5", my: 2 }}
-              />
-              <Grid item xs={3}>Age restriction</Grid>
-              <Grid item xs={9} sx={{ color: "#757575" }}>{eventData.ageRestriction}</Grid>
-              <Box
-                component="span"
-                sx={{ display: "block", width: "100%", borderBottom: "1px solid #c5c5c5", my: 2 }}
-              />
-              <Grid item xs={3}>Location</Grid>
-              <Grid item xs={9} sx={{ color: "#757575" }}>{eventData.location}</Grid>
-              <Box
-                component="span"
-                sx={{ display: "block", width: "100%", borderBottom: "1px solid #c5c5c5", my: 2 }}
-              />
-              <Grid item xs={3}>Event type</Grid>
-              <Grid item xs={9} sx={{ color: "#757575" }}>{eventData.eventType}</Grid>
-              <Box
-                component="span"
-                sx={{ display: "block", width: "100%", borderBottom: "1px solid #c5c5c5", my: 2 }}
-              />
-              <Grid item xs={3}>Date</Grid>
-              <Grid item xs={9} sx={{ color: "#757575" }}>{eventData.startDate} - {eventData.endDate}</Grid>
-              <Box
-                component="span"
-                sx={{ display: "block", width: "100%", borderBottom: "1px solid #c5c5c5", my: 2 }}
-              />
-              <Grid item xs={3}>Registrable</Grid>
-              <Grid item xs={9} sx={{ color: "#757575" }}>{eventData.isRegistrable}</Grid>
-              <Box
-                component="span"
-                sx={{ display: "block", width: "100%", borderBottom: "1px solid #c5c5c5", my: 2 }}
-              />
+              <DataDetailsItem title={"Title"} value={eventData.title}/>
+              <DataDetailsItem title={"Age restriction"} value={eventData.ageRestriction}/>
+              <DataDetailsItem title={"Location"} value={eventData.location}/>
+              <DataDetailsItem title={"Event type"} value={eventData.eventType}/>
+              <DataDetailsItem title={"Date"} value={`${eventData.startDate} - ${eventData.endDate}`}/>
+              <DataDetailsItem title={"Registrable"} value={eventData.isRegistrable}/>
               {(eventData.isRegistrable == "Yes") && 
-                <>
-                <Grid item xs={3}>Registrable link</Grid>
-                <Grid item xs={9} sx={{ color: "#757575" }}>{eventData.registrableLink}</Grid>
-                <Box
-                  component="span"
-                  sx={{ display: "block", width: "100%", borderBottom: "1px solid #c5c5c5", my: 2 }}
-                />
-               </>
+                <DataDetailsItem title={"Registrable link"} value={eventData.registrableLink}/>
               }
               <Grid item xs={3}>Description</Grid>
               <Grid item xs={9}>
@@ -156,15 +106,11 @@ const Event = () => {
           </div>
         </Box>
       }
-      { !showEditEvent && error &&
-        <Box component="main" sx={{ flexGrow: 1, p: 3, textAlign: 'center', fontSize: 'h6.fontSize'}}>
-          <Typography style={{ color: '#bf0707' }} variant="body1"> 
-            Upss, something wents wrong
-          </Typography>
-        </Box>
+      { 
+        !showEditModal && error && <ErrorMessage/>
       }
       {
-        showEditEvent && <UpdateEvent event={eventData} setShow={setShowEditEvent}/>
+        showEditModal && <UpdateEvent event={eventData} setShow={setShowEditModal}/>
       }
       { openCreateReminderModal && <CreateEventReminderModal openModal={openCreateReminderModal} setOpenModal={setOpenCreateReminderModal} onSaveChangesCallback={handleSaveEventReminderCallback}/> }
     </>
