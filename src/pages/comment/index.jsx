@@ -8,22 +8,14 @@ import Header from "../../components/Header";
 import { headCells, repliesRows } from "../../helpers/reply/datatablesource";
 import PostTable from "../../components/PostTable";
 import CreateModal from "../../components/CreateModal";
+import DataDetailsPicture from '../../components/DataDetailsPicture';
 import "./index.scss";
-
-const h6Styles = {
-  marginBottom: '15px',
-  fontFamily: "Roboto, Helvetica, Arial, sans-serif",
-  fontWeight: 400,
-  fontSize: '1rem',
-  lineHeight: 1.75,
-  letterSpacing: '0.00938em',
-  color: '#e6a307',
-};
 
 const Comment = () => {
   const { id } = useParams();
   const [commentData, setCommentData] = useState(null);
   const [error, setError] = useState(null);
+  const [openAddReplyModal, setOpenAddReplyModal] = useState(false);
 
   useEffect(() => {
     const url = 'https://jsonplaceholder.typicode.com/todos/' + id;
@@ -48,9 +40,6 @@ const Comment = () => {
       });
   }, [])
 
-  //show add reply component
-  const [openModal, setOpenModal] = useState(false);
-
   const handleCreateReply = (data) => {
     console.log("handleCreateReply", data);
   };
@@ -71,20 +60,18 @@ const Comment = () => {
           <div className="boxTitleComment">
             <div>
               <div className="commentTitleContainer">
-                <img
-                  alt="profile-user"
-                  width="100px"
-                  height="100px"
-                  src={commentData.authorPicture || 'https://www.asofiduciarias.org.co/wp-content/uploads/2018/06/sin-foto.png'}
-                  style={{ borderRadius: "50%", objectFit: "cover"}}
+                <DataDetailsPicture 
+                  pictureUrl={commentData.authorPicture} 
+                  defaultPictureUrl={'https://www.asofiduciarias.org.co/wp-content/uploads/2018/06/sin-foto.png'} 
+                  borderRadius="50%"
                 />
                 <Header title={commentData.author} subtitle={commentData.authorRole} subtitleColor="#757575"/>
               </div>
               <div className="commentDescriptionContainer">
-                <Typography>  {commentData.description}  </Typography>
+                <Typography>{commentData.description}</Typography>
               </div>
             </div>
-            <Button variant="outlined" onClick={() => setOpenModal(true)}>Add Reply</Button>
+            <Button variant="outlined" onClick={() => setOpenAddReplyModal(true)}>Add Reply</Button>
           </div>
           <PostTable
             tableTitle={"To access more actions, please select one or more replies"}
@@ -95,10 +82,10 @@ const Comment = () => {
           />  
         </Box>
       }
-      { error &&
-        <ErrorMessage/>
+      { 
+        error && <ErrorMessage/>
       }
-      { openModal && <CreateModal openModal={openModal} setOpenModal={setOpenModal} onCreateCallback={handleCreateReply} title={"Add reply"} placeholder={"Write a new reply"}/> }
+      { openAddReplyModal && <CreateModal openModal={openAddReplyModal} setOpenModal={setOpenAddReplyModal} onCreateCallback={handleCreateReply} title={"Add reply"} placeholder={"Write a new reply"}/> }
     </>
   );
 };

@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import CssBaseline from "@mui/material/CssBaseline";
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
 import Header from "../../components/Header";
-import "./index.scss";
 import { headCells, postRows } from "../../helpers/post/datatablesource";
 import CreateModal from "../../components/CreateModal";
 import PostTable from "../../components/PostTable";
+import DataDetailsPicture from '../../components/DataDetailsPicture';
+import "./index.scss";
 
 const h6Styles = {
   marginBottom: '15px',
@@ -24,6 +23,7 @@ const Forum = () => {
   const { id } = useParams();
   const [forumData, seForumData] = useState(null);
   const [error, setError] = useState(null);
+  const [openAddPostModal, setOpenAddPostModal] = useState(false);
 
   useEffect(() => {
     const url = 'https://jsonplaceholder.typicode.com/todos/' + id;
@@ -46,9 +46,6 @@ const Forum = () => {
       });
   }, [])
 
-  //show add post component
-  const [openModal, setOpenModal] = useState(false);
-
   const handleCreatePost = (data) => {
     console.log("handleCreatePost", data);
   };
@@ -68,16 +65,14 @@ const Forum = () => {
           <Header title="FORUM DETAILS"/>
           <div className="boxTitleForum">
             <div className="forumTitleContainer">
-              <img
-                alt="profile-user"
-                width="100px"
-                height="100px"
-                src={forumData.photo || "https://cannamazoo.com/assets/defaults/img/default-product-img.jpg"}
-                style={{ borderRadius: "50%", objectFit: "cover"}}
+              <DataDetailsPicture 
+                pictureUrl={forumData.photo} 
+                defaultPictureUrl={'https://cannamazoo.com/assets/defaults/img/default-product-img.jpg'} 
+                borderRadius="50%"
               />
               <Header title={forumData.title} subtitle={forumData.description} subtitleColor="#757575"/>
             </div>
-            <Button variant="outlined" onClick={() => setOpenModal(true)}>Add Post</Button>
+            <Button variant="outlined" onClick={() => setOpenAddPostModal(true)}>Add Post</Button>
           </div>
           <PostTable
             tableTitle={"To access more actions, please select one or more posts"}
@@ -88,10 +83,10 @@ const Forum = () => {
           />  
         </Box>
       }
-      { error &&
-        <ErrorMessage/>
+      { 
+        error && <ErrorMessage/>
       }
-      { openModal && <CreateModal openModal={openModal} setOpenModal={setOpenModal} onCreateCallback={handleCreatePost} title={"New post"} placeholder={"Write a new post"}/> }
+      { openAddPostModal && <CreateModal openModal={openAddPostModal} setOpenModal={setOpenAddPostModal} onCreateCallback={handleCreatePost} title={"New post"} placeholder={"Write a new post"}/> }
     </>
   );
 };

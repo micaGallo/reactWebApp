@@ -5,25 +5,17 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Header from "../../components/Header";
-import "./index.scss";
 import { headCells, commentRows } from "../../helpers/comment/datatablesource";
 import CreateModal from "../../components/CreateModal";
 import PostTable from "../../components/PostTable";
-
-const h6Styles = {
-  marginBottom: '15px',
-  fontFamily: "Roboto, Helvetica, Arial, sans-serif",
-  fontWeight: 400,
-  fontSize: '1rem',
-  lineHeight: 1.75,
-  letterSpacing: '0.00938em',
-  color: '#e6a307',
-};
+import DataDetailsPicture from '../../components/DataDetailsPicture';
+import "./index.scss";
 
 const Post = () => {
   const { id } = useParams();
   const [postData, setPostData] = useState(null);
   const [error, setError] = useState(null);
+  const [openAddCommentModal, setOpenAddCommentModal] = useState(false);
 
   useEffect(() => {
     const url = 'https://jsonplaceholder.typicode.com/todos/' + id;
@@ -49,9 +41,6 @@ const Post = () => {
       });
   }, [])
 
-  //show add comment component
-  const [openModal, setOpenModal] = useState(false);
-
   const handleCreateComment = (data) => {
     console.log("handleCreateComment", data);
   };
@@ -72,20 +61,18 @@ const Post = () => {
           <div className="boxTitlePost">
             <div>
               <div className="postTitleContainer">
-                <img
-                  alt="profile-user"
-                  width="100px"
-                  height="100px"
-                  src={postData.authorPicture || 'https://www.asofiduciarias.org.co/wp-content/uploads/2018/06/sin-foto.png'}
-                  style={{ borderRadius: "50%", objectFit: "cover"}}
+                <DataDetailsPicture 
+                  pictureUrl={postData.authorPicture} 
+                  defaultPictureUrl={'https://www.asofiduciarias.org.co/wp-content/uploads/2018/06/sin-foto.png'} 
+                  borderRadius="50%"
                 />
                 <Header title={postData.author} subtitle={postData.authorRole} subtitleColor="#757575"/>
               </div>
               <div className="postDescriptionContainer">
-                <Typography>  {postData.description}  </Typography>
+                <Typography>{postData.description}</Typography>
               </div>
             </div>
-            <Button variant="outlined" onClick={() => setOpenModal(true)}>Add Comment</Button>
+            <Button variant="outlined" onClick={() => setOpenAddCommentModal(true)}>Add Comment</Button>
           </div>
           <PostTable
             tableTitle={"To access more actions, please select one or more comments"}
@@ -96,10 +83,10 @@ const Post = () => {
           />  
         </Box>
       }
-      { error &&
-       <ErrorMessage/>
+      { 
+        error && <ErrorMessage/>
       }
-      { openModal && <CreateModal openModal={openModal} setOpenModal={setOpenModal} onCreateCallback={handleCreateComment} title={"Add a comment"} placeholder={"Write a new comment"}/> }
+      { openAddCommentModal && <CreateModal openModal={openAddCommentModal} setOpenModal={setOpenAddCommentModal} onCreateCallback={handleCreateComment} title={"Add a comment"} placeholder={"Write a new comment"}/> }
     </>
   );
 };

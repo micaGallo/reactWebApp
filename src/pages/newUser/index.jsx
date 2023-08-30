@@ -38,7 +38,6 @@ const NewUser = () => {
   const { register, handleSubmit, formState } = form;
   const { errors } = formState;
 
-
   const [selectedDesignationOption, setSelectedDesignationOption] = useState('seal');
   const [selectedFile, setSelectedFile] = useState(null);
 
@@ -46,7 +45,6 @@ const NewUser = () => {
     setSelectedDesignationOption(event.target.value);
     console.log("handleDesignationChange", selectedDesignationOption);
   };
-
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -58,7 +56,6 @@ const NewUser = () => {
     data.designation = selectedDesignationOption;
     data.picture = selectedFile;  
     console.log("onSubmit", data);
-
   };
 
   return(

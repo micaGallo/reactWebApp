@@ -7,6 +7,7 @@ import CreateEventReminderModal from "../../components/CreateEventReminderModal"
 import UpdateEvent from "../../components/UpdateEvent";
 import DataDetailsItem from '../../components/DataDetailsItem';
 import DataDetailsPicture from '../../components/DataDetailsPicture';
+import { DATA_DETAILS_ITEM_TYPE } from "../../utils/constants";
 import "./index.scss";
 
 const Event = () => {
@@ -14,6 +15,7 @@ const Event = () => {
   const [eventData, setEventData] = useState(null);
   const [error, setError] = useState(null);
   const [showEditModal, setShowEditModal] = useState(false);
+  const [openCreateReminderModal, setOpenCreateReminderModal] = useState(false);
 
   useEffect(() => {
     const url = 'https://jsonplaceholder.typicode.com/todos/' + id;
@@ -42,8 +44,6 @@ const Event = () => {
         setError(error);
       });
   }, [])
-
-  const [openCreateReminderModal, setOpenCreateReminderModal] = useState(false);
 
   const handleEdit= () => {
     setShowEditModal(true);
@@ -83,25 +83,55 @@ const Event = () => {
           </div>
           <div className="container">
             <div className="userPictureContainer">
-              <DataDetailsPicture pictureUrl={eventData.photo} defaultPictureUrl={'https://www.asofiduciarias.org.co/wp-content/uploads/2018/06/sin-foto.png'}/>
+              <DataDetailsPicture 
+                pictureUrl={eventData.photo} 
+                defaultPictureUrl={'https://www.asofiduciarias.org.co/wp-content/uploads/2018/06/sin-foto.png'}
+              />
             </div>
             <Grid container>
-              <DataDetailsItem title={"Title"} value={eventData.title}/>
-              <DataDetailsItem title={"Age restriction"} value={eventData.ageRestriction}/>
-              <DataDetailsItem title={"Location"} value={eventData.location}/>
-              <DataDetailsItem title={"Event type"} value={eventData.eventType}/>
-              <DataDetailsItem title={"Date"} value={`${eventData.startDate} - ${eventData.endDate}`}/>
-              <DataDetailsItem title={"Registrable"} value={eventData.isRegistrable}/>
+              <DataDetailsItem 
+                type={DATA_DETAILS_ITEM_TYPE.text} 
+                title={"Title"} 
+                value={eventData.title}
+              />
+              <DataDetailsItem 
+                type={DATA_DETAILS_ITEM_TYPE.text} 
+                title={"Age restriction"} 
+                value={eventData.ageRestriction}
+              />
+              <DataDetailsItem 
+                type={DATA_DETAILS_ITEM_TYPE.text} 
+                title={"Location"} 
+                value={eventData.location}
+              />
+              <DataDetailsItem 
+                type={DATA_DETAILS_ITEM_TYPE.text} 
+                title={"Event type"} 
+                value={eventData.eventType}
+              />
+              <DataDetailsItem 
+                type={DATA_DETAILS_ITEM_TYPE.text} 
+                title={"Date"} 
+                value={`${eventData.startDate} - ${eventData.endDate}`}
+              />
+              <DataDetailsItem 
+                type={DATA_DETAILS_ITEM_TYPE.text} 
+                title={"Registrable"} 
+                value={eventData.isRegistrable}
+              />
               {(eventData.isRegistrable == "Yes") && 
-                <DataDetailsItem title={"Registrable link"} value={eventData.registrableLink}/>
-              }
-              <Grid item xs={3}>Description</Grid>
-              <Grid item xs={9}>
-                <div
-                  dangerouslySetInnerHTML={{ __html: eventData.description }}
-                  style={{ color: "#757575" }}
+                <DataDetailsItem 
+                  type={DATA_DETAILS_ITEM_TYPE.text} 
+                  title={"Registrable link"} 
+                  value={eventData.registrableLink}
                 />
-              </Grid>
+              }
+              <DataDetailsItem 
+                type={DATA_DETAILS_ITEM_TYPE.html} 
+                title={"Description"} 
+                value={eventData.description} 
+                showSeparator={false}
+              />
             </Grid>
           </div>
         </Box>

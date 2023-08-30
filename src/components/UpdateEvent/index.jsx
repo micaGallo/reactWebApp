@@ -1,23 +1,13 @@
 import React, { useState} from "react";
 import { useForm } from "react-hook-form";
-import CssBaseline from "@mui/material/CssBaseline";
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import Header from "../../components/Header";
-import TextField from '@mui/material/TextField';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import NativeSelect from '@mui/material/NativeSelect';
-import "./index.scss";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 import dayjs from 'dayjs';
-import { FormControl, FormControlLabel, Radio, RadioGroup, Grid, Typography } from '@mui/material';
-import ReactQuill from 'react-quill'
-import 'quill/dist/quill.snow.css'
+import { Grid, Box, Button } from '@mui/material';
+import DataInputField from '../DataInputField';
+import { DATA_INPUT_FIELD_TYPE } from '../../utils/constants'; 
+import "./index.scss";
 
 const UpdateEvent = ({event, setShow}) => {
-  
 
   const form = useForm({
     defaultValues: {
@@ -45,30 +35,6 @@ const UpdateEvent = ({event, setShow}) => {
     { id: 'educational', value: 'EDUCATIONAL' }
   ];
 
-  var modules = {
-    toolbar: [
-      [{ size: ["small", false, "large", "huge"] }],
-      ["bold", "italic", "underline", "strike", "blockquote"],
-      [{ list: "ordered" }, { list: "bullet" }],
-      ["link", "image"],
-      [
-        { list: "ordered" },
-        { list: "bullet" },
-        { indent: "-1" },
-        { indent: "+1" },
-        { align: [] }
-      ],
-      [{ "color": ["#000000", "#e60000", "#ff9900", "#ffff00", "#008a00", "#0066cc", "#9933ff", "#ffffff", "#facccc", "#ffebcc", "#ffffcc", "#cce8cc", "#cce0f5", "#ebd6ff", "#bbbbbb", "#f06666", "#ffc266", "#ffff66", "#66b966", "#66a3e0", "#c285ff", "#888888", "#a10000", "#b26b00", "#b2b200", "#006100", "#0047b2", "#6b24b2", "#444444", "#5c0000", "#663d00", "#666600", "#003700", "#002966", "#3d1466", 'custom-color'] }],
-    ]
-  };
-
-  var formats = [
-    "header", "height", "bold", "italic",
-    "underline", "strike", "blockquote",
-    "list", "color", "bullet", "indent",
-    "link", "image", "align", "size",
-  ];
-
   //TODO: the default value of setSelectedEventTypeOption should be just event.eventType
   const [selectedEventTypeOption, setSelectedEventTypeOption] = useState(eventTypeOptions.find(option => option.value === event.eventType).id);
   const [isRegistrable, setRegistrable] = useState(event.isRegistrable == "Yes");
@@ -93,7 +59,6 @@ const UpdateEvent = ({event, setShow}) => {
     setSelectedEndDate(formattedDate);
     setShowErrorEndDate(!setSelectedEndDate);
   };
-
 
   const handleIsRegistrableChange = (event) => {
     setRegistrable(event.target.value === 'true');
@@ -127,11 +92,11 @@ const UpdateEvent = ({event, setShow}) => {
       data.isRegistrable = isRegistrable;
       data.description = description;
       console.log("onSubmit", data);
+      setShow(false);
     }else {
       if(!selectedStartDate){
         setShowErrorStartDate(true);
       }
-  
       if(!selectedEndDate){
         setShowErrorEndDate(true);
       }
@@ -145,146 +110,84 @@ const UpdateEvent = ({event, setShow}) => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="container">
             <Grid container>
-              <div className="textFieldContainer">
-                <Grid item xs={3}>Title</Grid>
-                <TextField
-                  id="title"
-                  variant="standard"
-                  fullWidth
-                  {...register("title", { required: "Title is required" })}
-                  error={!!errors.title}
-                  helperText={errors.title?.message}
-                />
-              </div>
-              <div className="textFieldContainer">
-                <Grid item xs={3}>Age restriction</Grid>
-                <TextField
-                  id="ageRestriction"
-                  variant="standard"
-                  fullWidth
-                  {...register("ageRestriction", { required: "Age restriction is required" })}
-                  error={!!errors.ageRestriction}
-                  helperText={errors.ageRestriction?.message}
-                />
-              </div>
-              <div className="textFieldContainer">
-                <Grid item xs={3}>Location</Grid>
-                <TextField
-                  id="location"
-                  variant="standard"
-                  fullWidth
-                  {...register("location", { required: "Location is required" })}
-                  error={!!errors.location}
-                  helperText={errors.location?.message}
-                />
-              </div>
-              <div className="textFieldContainer">
-                <Grid item xs={3} id="dropdown-label">Type</Grid>
-                <FormControl fullWidth>
-                  <NativeSelect
-                    defaultValue={selectedEventTypeOption}
-                    onChange={handleEventTypeChange}
-                    inputProps={{
-                      name: 'type',
-                      id: 'type',
-                    }}
-                  >
-                    {eventTypeOptions.map(option => (
-                      <option key={option.id} value={option.id}>{option.value}</option>
-                    ))}
-                  </NativeSelect>
-                </FormControl>
-              </div>
-              <div className="textFieldContainer">
-                <Grid item xs={2.4}>Start date</Grid>
-                <div style={{ display: 'flex', flexDirection: 'column' }}>
-                  <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <DateTimePicker value={selectedStartDate || dayjs(event.selectedStartDate)} onChange={handleStartDateChange}/>
-                  </LocalizationProvider>
-                  {showErrorStartDate && (
-                    <Typography style={{ color: '#d32f2f' }} variant="caption">
-                      Start date is required
-                    </Typography>
-                  )}
-                </div>
-              </div>
-              <div className="textFieldContainer">
-                <Grid item xs={2.4}>End date</Grid>
-                <div style={{ display: 'flex', flexDirection: 'column' }}>
-                  <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <DateTimePicker value={selectedEndDate || dayjs(event.selectedEndDate)} onChange={handleEndDateChange}/>
-                  </LocalizationProvider>
-                  {showErrorEndDate && (
-                    <Typography style={{ color: '#d32f2f' }} variant="caption">
-                      End date is required
-                    </Typography>
-                  )}
-                </div>
-              </div>
-              <div className="textFieldContainer">
-                <Grid item xs={2.4}>Registrable</Grid>
-                <FormControl>
-                  <RadioGroup
-                    id="isRegistrable"
-                    name="isRegistrable"
-                    value={isRegistrable.toString()}
-                    onChange={handleIsRegistrableChange}
-                  >
-                    <Box display="flex" flexDirection="row">
-                      <FormControlLabel value="false" control={<Radio />} label="No" />
-                      <FormControlLabel value="true" control={<Radio />} label="Yes" />
-                    </Box>
-                  </RadioGroup>
-                </FormControl>
-              </div>
+              <DataInputField 
+                type={DATA_INPUT_FIELD_TYPE.text} 
+                label={"Title"} 
+                id={"title"} 
+                errorMessage={"Title is required"} 
+                errors={errors} 
+                register={register}
+              /> 
+              <DataInputField 
+                type={DATA_INPUT_FIELD_TYPE.text} 
+                label={"Age restriction"} 
+                id={"ageRestriction"} 
+                errorMessage={"Age restriction is required"} 
+                errors={errors} 
+                register={register}
+              /> 
+              <DataInputField 
+                type={DATA_INPUT_FIELD_TYPE.text} 
+                label={"Location"} 
+                id={"location"} 
+                errorMessage={"Location is required"} 
+                errors={errors} 
+                register={register}
+              /> 
+              <DataInputField 
+                type={DATA_INPUT_FIELD_TYPE.dropdown} 
+                label={"Type"} 
+                id={"type"} 
+                value={selectedEventTypeOption} 
+                onChangeCallback={handleEventTypeChange} 
+                dropdownOptions={eventTypeOptions}
+              /> 
+              <DataInputField 
+                type={DATA_INPUT_FIELD_TYPE.date} 
+                label={"Start date"} 
+                errorMessage={"Start date is required"} 
+                value={selectedStartDate || dayjs(event.selectedStartDate)} 
+                onChangeCallback={handleStartDateChange} 
+                showErrorDate={showErrorStartDate}
+              /> 
+              <DataInputField 
+                type={DATA_INPUT_FIELD_TYPE.date} 
+                label={"End date"} 
+                errorMessage={"End date is required"} 
+                value={selectedEndDate || dayjs(event.selectedEndDate)} 
+                onChangeCallback={handleEndDateChange} 
+                showErrorDate={showErrorEndDate}
+              /> 
+              <DataInputField 
+                type={DATA_INPUT_FIELD_TYPE.radio} 
+                label={"Registrable"} 
+                id={"isRegistrable"}
+                value={isRegistrable.toString()} 
+                onChangeCallback={handleIsRegistrableChange} 
+              /> 
               {(isRegistrable == true) && (
-                <div className="textFieldContainer">
-                  <Grid item xs={3}>Registrable link</Grid>
-                  <TextField
-                    id="registrableLink"
-                    variant="standard"
-                    fullWidth
-                    {...register("registrableLink", { required: "Registrable link is required" })}
-                    error={!!errors.registrableLink}
-                    helperText={errors.registrableLink?.message}
-                  />
-               </div>
+                <DataInputField 
+                  type={DATA_INPUT_FIELD_TYPE.text} 
+                  label={"Registrable link"} 
+                  id={"registrableLink"} 
+                  errorMessage={"Registrable link is required"} 
+                  errors={errors} 
+                  register={register}
+                /> 
               )}
-
-              <div className="textFieldContainer">
-                <Grid item xs={2.4}>Photo</Grid>
-                <input
-                  type="file"
-                  id="photo"
-                  onChange={handleFileChange}
-                  accept="image/*"
-                  style={{ display: 'none' }}
-                />
-                <label htmlFor="photo">
-                  <Button variant="outlined" size="small" startIcon={<AccountCircleIcon />}  component="span">
-                    Upload Picture
-                  </Button>
-                </label>
-                {selectedFile && <div className="pictureSelectedContainer">{selectedFile.name}</div>}
-              </div>
-              <div className="textFieldContainer">
-                <Grid item xs={2.4}>Description</Grid>
-                <Box component="main">
-                  <div className="cmsGrid">
-                    <ReactQuill
-                      theme="snow"
-                      modules={modules}
-                      formats={formats}
-                      value={description}
-                      onChange={handleDescriptionChange}
-                      style={{ height: "500px" }}
-                    >
-                    </ReactQuill>
-                  </div>
-                </Box>
-                
-              </div>
-
+              <DataInputField 
+                type={DATA_INPUT_FIELD_TYPE.picture} 
+                label={"Photo"} 
+                id={"photo"} 
+                selectedFile={selectedFile} 
+                onChangeCallback={handleFileChange} 
+              /> 
+              <DataInputField 
+                type={DATA_INPUT_FIELD_TYPE.reactQuill} 
+                label={"Description"} 
+                value={description} 
+                onChangeCallback={handleDescriptionChange} 
+              /> 
             </Grid>
           </div>
           <div className="buttonContainer">

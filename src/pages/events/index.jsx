@@ -1,10 +1,10 @@
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from '@mui/material/Box';
-import "./index.scss";
 import Header from "../../components/Header";
 import Table from "../../components/Table"
 import { headCells, eventRows } from "../../helpers/event/datatablesource";
 import Button from '@mui/material/Button';
+import "./index.scss";
 
 const Events = () => {
   const handleDelete = (ids) => {

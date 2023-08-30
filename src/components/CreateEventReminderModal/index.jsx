@@ -1,16 +1,10 @@
 import React, { useState} from "react";
 import { useForm } from "react-hook-form";
-import CssBaseline from "@mui/material/CssBaseline";
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import Box from '@mui/material/Box';
-import Modal from '@mui/material/Modal';
-import "./index.scss";
-import { Grid, Typography } from "@mui/material";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
+import { Grid, Box, Modal, Button } from "@mui/material";
 import dayjs from 'dayjs';
+import DataInputField from '../../components/DataInputField';
+import { DATA_INPUT_FIELD_TYPE } from '../../utils/constants'; 
+import "./index.scss";
 
 const style = {
   position: 'absolute',
@@ -70,41 +64,29 @@ const CreateEventReminderModal = ({openModal, setOpenModal, onSaveChangesCallbac
           <form onSubmit={handleSubmit(onSubmit)}>
             <h2 id="parent-modal-title">Create event reminder</h2>
             <Grid container>
-              <div className="textFieldContainer">
-                <Grid item xs={3}>Title</Grid>
-                <TextField
-                  id="title"
-                  variant="standard"
-                  fullWidth
-                  {...register("title", { required: "Title is required" })}
-                  error={!!errors.title}
-                  helperText={errors.title?.message}
-                />
-              </div>
-              <div className="textFieldContainer">
-                <Grid item xs={3}>Message</Grid>
-                <TextField
-                  id="message"
-                  variant="standard"
-                  fullWidth
-                  {...register("message", { required: "Message is required" })}
-                  error={!!errors.message}
-                  helperText={errors.message?.message}
-                />
-              </div>
-              <div className="textFieldContainer">
-                <Grid item xs={2.4}>Date</Grid>
-                <div style={{ display: 'flex', flexDirection: 'column' }}>
-                  <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <DateTimePicker value={selectedDate} onChange={handleDateChange}/>
-                  </LocalizationProvider>
-                  {showErrorDate && (
-                    <Typography style={{ color: '#d32f2f' }} variant="caption">
-                      Date is required
-                    </Typography>
-                  )}
-                </div>
-              </div>
+              <DataInputField 
+                type={DATA_INPUT_FIELD_TYPE.text} 
+                label={"Title"} 
+                id={"title"} 
+                errorMessage={"Title is required"} 
+                errors={errors} 
+                register={register}
+              /> 
+              <DataInputField 
+                type={DATA_INPUT_FIELD_TYPE.text} 
+                label={"Message"} id={"message"} 
+                errorMessage={"Message is required"} 
+                errors={errors} 
+                register={register}
+              /> 
+              <DataInputField 
+                type={DATA_INPUT_FIELD_TYPE.date} 
+                label={"Date"} 
+                errorMessage={"Date is required"} 
+                value={selectedDate} 
+                handleDateChange={handleDateChange} 
+                showErrorDate={showErrorDate}
+              /> 
             </Grid>
             <div className="postButtonContainer">
               <Button variant="outlined" onClick={() => setOpenModal(false)}>Cancel</Button>

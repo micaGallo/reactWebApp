@@ -1,9 +1,9 @@
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from '@mui/material/Box';
-import "./index.scss";
 import Header from "../../components/Header";
 import Table from "../../components/Table"
 import { headCells, notificationsRows } from "../../helpers/pushNotifications/datatablesource";
+import "./index.scss";
 
 const PushNotifications = () => {
   const handleDelete = (ids) => {

@@ -1,9 +1,9 @@
 import React from "react";
 import Box from '@mui/material/Box';
 import Header from "../../components/Header";
-import "./index.scss";
 import { headCells, forumRows } from "../../helpers/forum/datatablesource";
 import Table from "../../components/Table"
+import "./index.scss";
 
 const Forums = () => {
   const handleDelete = (ids) => {
@@ -28,7 +28,6 @@ const Forums = () => {
       />
     </Box>
   );
-
 };
 
 export default Forums;

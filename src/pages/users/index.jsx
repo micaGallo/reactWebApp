@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import "./index.scss";
 import Header from "../../components/Header";
 import Modal from '../../components/Modal';
 import { headCells, userRows } from "../../helpers/user/datatablesource";
 import UserTable from "../../components/UserTable"
+import "./index.scss";
 
 const Users = () => {
   //open confirmation modal

@@ -1,6 +1,6 @@
 import Box from '@mui/material/Box';
 
-const DataDetailsPicture = ({ pictureUrl, defaultPictureUrl}) => {
+const DataDetailsPicture = ({ pictureUrl, defaultPictureUrl, borderRadius="10%"}) => {
   return (
     <Box display="block" justifyContent="center" alignItems="center">
       <img
@@ -8,7 +8,7 @@ const DataDetailsPicture = ({ pictureUrl, defaultPictureUrl}) => {
         width="120px"
         height="120px"
         src={pictureUrl || defaultPictureUrl}
-        style={{ borderRadius: "10%", objectFit: "cover"}}
+        style={{ borderRadius, objectFit: "cover"}}
       />
     </Box>
   );

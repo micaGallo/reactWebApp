@@ -7,6 +7,7 @@ import Menu from '../../components/Menu';
 import ErrorMessage from '../../components/ErrorMessage';
 import DataDetailsItem from '../../components/DataDetailsItem';
 import DataDetailsPicture from '../../components/DataDetailsPicture';
+import { DATA_DETAILS_ITEM_TYPE } from "../../utils/constants";
 import "./index.scss";
 
 const User = () => {
@@ -81,13 +82,33 @@ const User = () => {
           </div>
           <div className="container">
             <div className="userPictureContainer">
-              <DataDetailsPicture pictureUrl={userData.picture} defaultPictureUrl={'https://www.asofiduciarias.org.co/wp-content/uploads/2018/06/sin-foto.png'}/>
+              <DataDetailsPicture 
+                pictureUrl={userData.picture} 
+                defaultPictureUrl={'https://www.asofiduciarias.org.co/wp-content/uploads/2018/06/sin-foto.png'}
+              />
             </div>
             <Grid container>
-              <DataDetailsItem title={"Name"} value={userData.name}/>
-              <DataDetailsItem title={"Designation"} value={userData.designation}/>
-              <DataDetailsItem title={"Preferred first name"} value={userData.preferredFirstName}/>
-              <DataDetailsItem title={"Email"} value={userData.email} showSeparator={false}/>
+              <DataDetailsItem 
+                type={DATA_DETAILS_ITEM_TYPE.text} 
+                title={"Name"} 
+                value={userData.name}
+              />
+              <DataDetailsItem 
+                type={DATA_DETAILS_ITEM_TYPE.text} 
+                title={"Designation"} 
+                value={userData.designation}
+              />
+              <DataDetailsItem 
+                type={DATA_DETAILS_ITEM_TYPE.text} 
+                title={"Preferred first name"} 
+                value={userData.preferredFirstName}
+              />
+              <DataDetailsItem 
+                type={DATA_DETAILS_ITEM_TYPE.text} 
+                title={"Email"} 
+                value={userData.email} 
+                showSeparator={false}
+              />
             </Grid>
           </div>
         </Box>
