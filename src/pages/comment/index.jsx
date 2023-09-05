@@ -8,6 +8,7 @@ import Header from "../../components/Header";
 import { headCells, repliesRows } from "../../helpers/reply/datatablesource";
 import PostTable from "../../components/PostTable";
 import CreateModal from "../../components/CreateModal";
+import ErrorMessage from "../../components/ErrorMessage";
 import DataDetailsPicture from '../../components/DataDetailsPicture';
 import "./index.scss";
 

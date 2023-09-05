@@ -5,6 +5,7 @@ import Header from "../../components/Header";
 import Menu from '../../components/Menu';
 import CreateEventReminderModal from "../../components/CreateEventReminderModal";
 import UpdateEvent from "../../components/UpdateEvent";
+import ErrorMessage from "../../components/ErrorMessage";
 import DataDetailsItem from '../../components/DataDetailsItem';
 import DataDetailsPicture from '../../components/DataDetailsPicture';
 import { DATA_DETAILS_ITEM_TYPE } from "../../utils/constants";

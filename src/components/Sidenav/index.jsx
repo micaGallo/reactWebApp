@@ -97,7 +97,7 @@ export default function Sidenav() {
               </Box>
               <Box textAlign="center">
                 <Typography variant="h6" fontWeight="bold" color="#141414" sx={{ m: "10px 0 0 0" }}>
-                  Navy SEAL
+                  Navy SEAL Foundation
                 </Typography>
               </Box>
             </Box>

@@ -5,6 +5,7 @@ import Button from '@mui/material/Button';
 import Header from "../../components/Header";
 import { headCells, postRows } from "../../helpers/post/datatablesource";
 import CreateModal from "../../components/CreateModal";
+import ErrorMessage from "../../components/ErrorMessage";
 import PostTable from "../../components/PostTable";
 import DataDetailsPicture from '../../components/DataDetailsPicture';
 import "./index.scss";

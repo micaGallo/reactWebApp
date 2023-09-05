@@ -7,6 +7,7 @@ import Typography from '@mui/material/Typography';
 import Header from "../../components/Header";
 import { headCells, commentRows } from "../../helpers/comment/datatablesource";
 import CreateModal from "../../components/CreateModal";
+import ErrorMessage from "../../components/ErrorMessage";
 import PostTable from "../../components/PostTable";
 import DataDetailsPicture from '../../components/DataDetailsPicture';
 import "./index.scss";
