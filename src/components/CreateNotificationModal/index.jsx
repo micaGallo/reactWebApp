@@ -2,7 +2,7 @@ import React, { useState} from "react";
 import { useForm } from "react-hook-form";
 import { Grid, Box, Modal, Button } from "@mui/material";
 import dayjs from 'dayjs';
-import DataInputField from '../../components/DataInputField';
+import DataInputField from '../DataInputField';
 import { DATA_INPUT_FIELD_TYPE } from '../../utils/constants'; 
 import "./index.scss";
 
@@ -20,9 +20,9 @@ const style = {
   zindex: 1000000000,
 };
 
-const CreateEventReminderModal = ({openModal, setOpenModal, onSaveChangesCallback}) => {
-  const [selectedDate, setSelectedDate] = useState(null);
-  const [showErrorDate, setShowErrorDate] = useState(false);
+const CreateNotificationModal = ({openModal, setOpenModal, onSaveChangesCallback}) => {
+  // const [selectedDate, setSelectedDate] = useState(null);
+  // const [showErrorDate, setShowErrorDate] = useState(false);
 
   const form = useForm({
     defaultValues: {
@@ -35,21 +35,22 @@ const CreateEventReminderModal = ({openModal, setOpenModal, onSaveChangesCallbac
   const { register, handleSubmit, formState } = form;
   const { errors } = formState;
 
-  const handleDateChange = (newValue) => {
-    const formattedDate = newValue ? dayjs(newValue).format('MM/DD/YYYY hh:mm a') : null;
-    setSelectedDate(formattedDate);
-    setShowErrorDate(!selectedDate);
-  };
+  // const handleDateChange = (newValue) => {
+  //   const formattedDate = newValue ? dayjs(newValue).format('MM/DD/YYYY hh:mm a') : null;
+  //   setSelectedDate(formattedDate);
+  //   setShowErrorDate(!selectedDate);
+  // };
 
   const onSubmit = (data) => {
-    if(selectedDate){
-      setShowErrorDate(false);
-      data.date = selectedDate;  
+    // if(selectedDate){
+      // setShowErrorDate(false);
+      // data.date = selectedDate;  
       onSaveChangesCallback(data);
+      setOpenModal(false);
       console.log("onSubmit", data);
-    }else{
-      setShowErrorDate(true);
-    }
+    // }else{
+    //   setShowErrorDate(true);
+    // }
   };
 
   return (
@@ -62,7 +63,7 @@ const CreateEventReminderModal = ({openModal, setOpenModal, onSaveChangesCallbac
       >
         <Box sx={{ ...style, width: 600 }}>
           <form onSubmit={handleSubmit(onSubmit)}>
-            <h2 id="parent-modal-title">Create event reminder</h2>
+            <h2 id="parent-modal-title">Create notification</h2>
             <Grid container>
               <DataInputField 
                 type={DATA_INPUT_FIELD_TYPE.text} 
@@ -79,14 +80,14 @@ const CreateEventReminderModal = ({openModal, setOpenModal, onSaveChangesCallbac
                 errors={errors} 
                 register={register}
               /> 
-              <DataInputField 
+              {/* <DataInputField 
                 type={DATA_INPUT_FIELD_TYPE.date} 
                 label={"Date"} 
                 errorMessage={"Date is required"} 
                 value={selectedDate} 
                 handleDateChange={handleDateChange} 
                 showErrorDate={showErrorDate}
-              /> 
+              />  */}
             </Grid>
             <div className="postButtonContainer">
               <Button variant="outlined" onClick={() => setOpenModal(false)}>Cancel</Button>
@@ -99,4 +100,4 @@ const CreateEventReminderModal = ({openModal, setOpenModal, onSaveChangesCallbac
   );
 };
 
-export default CreateEventReminderModal;
+export default CreateNotificationModal;

@@ -3,14 +3,14 @@ import { Routes, Route, BrowserRouter, Navigate } from "react-router-dom";
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from '@mui/material/Box';
 import Sidenav from "./components/Sidenav";
-import Home from "./pages/home";
+// import Home from "./pages/home";
 import Logout from "./pages/logout";
 import Login from "./pages/login";
 import Users from "./pages/users";
 import User from "./pages/user"
 import Forums from "./pages/forums";
 import Forum from "./pages/forum"
-import PushNotifications from "./pages/pushNotifications";
+// import PushNotifications from "./pages/pushNotifications";
 import Events from "./pages/events";
 import Event from "./pages/event"
 import NewUser from "./pages/newUser";
@@ -24,13 +24,12 @@ export default function App() {
     <AuthProvider>
       <BrowserRouter>
         <Box sx={{ display: 'flex' }}>
-          {/* <Sidenav /> */}
           <Routes>
             <Route path="/login" exact element={<Login />} />
             <Route path="/" exact element={
               <>
                 <Sidenav/>
-                <Home />
+                <Users />
               </>
             } />
             <Route path="/users" element={
@@ -93,12 +92,12 @@ export default function App() {
                 <Event />
               </>
             } />
-            <Route path="/notifications" exact element={
+            {/* <Route path="/notifications" exact element={
               <>
                 <Sidenav/>
                 <PushNotifications />
               </>
-            } />
+            } /> */}
             <Route path="/logout" exact element={
               <>
                 <Sidenav/>

@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { Grid, Box, Button} from "@mui/material";
 import Header from "../../components/Header";
 import Menu from '../../components/Menu';
-import CreateEventReminderModal from "../../components/CreateEventReminderModal";
+import CreateNotificationModal from "../../components/CreateNotificationModal";
 import UpdateEvent from "../../components/UpdateEvent";
 import ErrorMessage from "../../components/ErrorMessage";
 import DataDetailsItem from '../../components/DataDetailsItem';
@@ -16,7 +16,7 @@ const Event = () => {
   const [eventData, setEventData] = useState(null);
   const [error, setError] = useState(null);
   const [showEditModal, setShowEditModal] = useState(false);
-  const [openCreateReminderModal, setOpenCreateReminderModal] = useState(false);
+  const [openCreateNotificationModal, setOpenCreateNotificationModal] = useState(false);
 
   useEffect(() => {
     const url = 'https://jsonplaceholder.typicode.com/todos/' + id;
@@ -57,9 +57,9 @@ const Event = () => {
     console.log('event data', eventData);
   };
 
-  const handleCreateEventReminder = () => {
+  const handleCreateNotification = () => {
     console.log("handleSetReminder");
-    setOpenCreateReminderModal(true)
+    setOpenCreateNotificationModal(true)
   };
 
   const handleSaveEventReminderCallback = (data) => {
@@ -68,7 +68,7 @@ const Event = () => {
 
   const menuItems = [
     {name: 'Delete', action: handleDelete},
-    {name: 'Create event reminder', action: handleCreateEventReminder},
+    {name: 'Create notification', action: handleCreateNotification},
   ];
 
   return(
@@ -143,7 +143,7 @@ const Event = () => {
       {
         showEditModal && <UpdateEvent event={eventData} setShow={setShowEditModal}/>
       }
-      { openCreateReminderModal && <CreateEventReminderModal openModal={openCreateReminderModal} setOpenModal={setOpenCreateReminderModal} onSaveChangesCallback={handleSaveEventReminderCallback}/> }
+      { openCreateNotificationModal && <CreateNotificationModal openModal={openCreateNotificationModal} setOpenModal={setOpenCreateNotificationModal} onSaveChangesCallback={handleSaveEventReminderCallback}/> }
     </>
   );
 };

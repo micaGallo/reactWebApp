@@ -7,12 +7,12 @@ import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
-import DashboardIcon from '@mui/icons-material/Dashboard';
+// import DashboardIcon from '@mui/icons-material/Dashboard';
 import FeedIcon from '@mui/icons-material/Feed';
-import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
+// import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
 import GroupIcon from '@mui/icons-material/Group';
 import EventIcon from '@mui/icons-material/Event';
-import EditCalendarIcon from '@mui/icons-material/EditCalendar';
+// import EditCalendarIcon from '@mui/icons-material/EditCalendar';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ListItem from '@mui/material/ListItem';
@@ -104,7 +104,7 @@ export default function Sidenav() {
           )}
         <Divider />
         <List>
-          <ListItem disablePadding sx={{ display: 'block' }} onClick={()=>{navigate("/")}}>
+          {/* <ListItem disablePadding sx={{ display: 'block' }} onClick={()=>{navigate("/")}}>
             <ListItemButton
               sx={{
                 minHeight: 48,
@@ -124,7 +124,7 @@ export default function Sidenav() {
               <ListItemText primary="Dashboard" sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
             <Divider />
-          </ListItem>
+          </ListItem> */}
           <ListItem disablePadding sx={{ display: 'block' }} onClick={()=>{navigate("/users")}}>
             <ListItemButton
               sx={{
@@ -188,7 +188,7 @@ export default function Sidenav() {
             </ListItemButton>
             <Divider />
           </ListItem>
-          <ListItem disablePadding sx={{ display: 'block' }} onClick={()=>{navigate("/notifications")}}>
+          {/* <ListItem disablePadding sx={{ display: 'block' }} onClick={()=>{navigate("/notifications")}}>
             <ListItemButton
               sx={{
                 minHeight: 48,
@@ -208,7 +208,7 @@ export default function Sidenav() {
               <ListItemText primary="Notifications" sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
             <Divider />
-          </ListItem>
+          </ListItem> */}
         </List>
         <div style={{ flex: '1 1' }}></div>
         <List>
