@@ -1,0 +1,22 @@
+.userTitleContainer{
+  display: flex;
+  align-items: baseline !important;
+  justify-content: space-between !important;
+  margin: 0px !important;
+
+  .actionsContainer{
+    display: flex;
+    align-items: center;
+  }
+}
+
+.container {
+  box-shadow: 0 0 20px rgba(0,0,0,.15);
+  border-radius: 4px;
+  padding: 32px 32px;
+
+  .userPictureContainer{
+    margin-bottom: 30px;
+    justify-items: center;
+  }
+}

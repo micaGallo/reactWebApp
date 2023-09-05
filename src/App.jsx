@@ -1,35 +1,113 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from "react";
+import { Routes, Route, BrowserRouter, Navigate } from "react-router-dom";
+import CssBaseline from "@mui/material/CssBaseline";
+import Box from '@mui/material/Box';
+import Sidenav from "./components/Sidenav";
+// import Home from "./pages/home";
+import Logout from "./pages/logout";
+import Login from "./pages/login";
+import Users from "./pages/users";
+import User from "./pages/user"
+import Forums from "./pages/forums";
+import Forum from "./pages/forum"
+// import PushNotifications from "./pages/pushNotifications";
+import Events from "./pages/events";
+import Event from "./pages/event"
+import NewUser from "./pages/newUser";
+import NewEvent from "./pages/newEvent";
+import Post from "./pages/post";
+import Comment from "./pages/comment";
+import { AuthProvider } from "./contexts/AuthContext"
 
-function App() {
-  const [count, setCount] = useState(0)
-
+export default function App() {
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <AuthProvider>
+      <BrowserRouter>
+        <Box sx={{ display: 'flex' }}>
+          <Routes>
+            <Route path="/login" exact element={<Login />} />
+            <Route path="/" exact element={
+              <>
+                <Sidenav/>
+                <Users />
+              </>
+            } />
+            <Route path="/users" element={
+              <>
+                <Sidenav/>
+                <Users />
+              </>
+            } />
+            <Route path="/users/:id" element={
+              <>
+                <Sidenav/>
+                <User />
+              </>
+            } />
+            <Route path="/users/new" element={
+              <>
+                <Sidenav/>
+                <NewUser />
+              </>
+            } />
+            <Route path="/forums" element={
+              <>
+                <Sidenav/>
+                <Forums />
+              </>
+            } />
+            <Route path="/forums/:forumId" element={
+              <>
+                <Sidenav/>
+                <Forum />
+              </>
+            } />
+            <Route path="/forums/:forumId/posts/:postId" element={
+              <>
+                <Sidenav/>
+                <Post />
+              </>
+            } />
+            <Route path="/forums/:forumId/posts/:postId/comments/:commentId" element={
+              <>
+                <Sidenav/>
+                <Comment />
+              </>
+            } />
+            <Route path="/events" exact element={
+              <>
+                <Sidenav/>
+                <Events />
+              </>
+            } />
+            <Route path="/events/new" element={
+              <>
+                <Sidenav/>
+                <NewEvent />
+              </>
+            } />
+            <Route path="/events/:eventId" element={
+              <>
+                <Sidenav/>
+                <Event />
+              </>
+            } />
+            {/* <Route path="/notifications" exact element={
+              <>
+                <Sidenav/>
+                <PushNotifications />
+              </>
+            } /> */}
+            <Route path="/logout" exact element={
+              <>
+                <Sidenav/>
+                <Logout />
+              </>
+            } />
+            <Route path="/*" element={<Navigate to="/" />} />
+          </Routes>
+        </Box>
+      </BrowserRouter>
+    </AuthProvider>
+  );
 }
-
-export default App

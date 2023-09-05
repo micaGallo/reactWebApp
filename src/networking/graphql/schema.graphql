@@ -1,0 +1,195 @@
+type CreateUserResponse {
+  success: Boolean!
+  message: String!
+  token: String
+}
+​
+type VerifySalesforceEmailResponse {
+  success: Boolean!
+  email: String
+  designation: String
+  firstName: String
+  lastName: String
+  token: String
+}
+​
+type SignInResponse {
+  success: Boolean!
+  token: String!
+  refreshToken: String!
+  tokenExpires: Int!
+}
+​
+type Response {
+  success: Boolean!
+}
+​
+type User {
+  firstName: String!
+  lastName: String!
+  email: String!
+  designation: String!
+  preferredFirstName: String!
+  emailVerified: Boolean!
+}
+​
+input CreateUserInput {
+  email: String!
+  password: String!
+  image: String
+  preferredFirstName: String
+}
+​
+input RequestCreateUserInput {
+  email: String!
+  firstName: String!
+  lastName: String!
+  designation: String!
+  serviceMemberClassNumber: String!
+  message: String
+  success: Boolean!
+}
+​
+input UpdateUserInput {
+  image: String
+  deviceToken: String
+  preferredFirstName: String
+}
+​
+type Query {
+  verifySalesforceEmail(email: String!): VerifySalesforceEmailResponse!
+  requestCreateUser(input: RequestCreateUserInput!): Response!
+  getUser: User!
+  getEvents(input: GetEventsInput!): [Event]
+  getEventById(eventId: Int!): Event
+  serachEvents(query: String!): [Event]
+  getEventTypes: [String]!
+  getNotificationById(id: ID!): Notification
+  getForums: [Forum!]!
+  getForum(id: Int!): Forum
+  getPost(id: Int!): Post
+  getNews: [News]
+  getNewsById(newsId: Int!): News
+  searchUsers(query: String!): [User]!
+  getUserById(userId: Int!): ScopeUser!
+  getNotifications: [Notification]!
+}
+​
+type Mutation {
+  createUser(input: CreateUserInput!): CreateUserResponse!
+  verifyAccount(verificationCode: String!): Response!
+  signIn(email: String!, password: String!): SignInResponse!
+  forgotPassword(email: String!): Response!
+  changePassword(password: String!): Response!
+  updateUser(input: UpdateUserInput!): Response!
+  refreshDesignation: Response!
+  deleteUser: Response!
+  purgeUser(userId: Int!): Response!
+  createEvent(input: CreateEventInput!): Event!
+  createNotification(title: String!, message: String!, targetUserIds: [Int!]!): Notification!
+  createForum(title: String!, description: String, image: String!, badgeRequired: String!): Forum!
+  createPost(forumId: Int!, title: String!, content: String!): Post!
+  editPost(postId: Int!, title: String!, content: String!): Post!
+  deletePost(postId: Int!): Response!
+  reportPost(postId: Int!, message: String!): Response!
+  createComment(forumId: Int!, postId: Int!, text: String!): Comment!
+  editComment(commentd: Int!, text: String!): Comment!
+  deleteComment(commentId: Int!): Response!
+  reportComment(commentId: Int!, message: String!): Response!
+  createReply(forumId: Int!, postId: Int!, commentId: Int!, text: String!): Reply!
+  editReply(replyId: Int!, text: String!): Reply!
+  deleteReply(replyId: Int!): Response!
+  reportReply(replyId: Int!, message: String!): Response!
+  createChatToken: CreateChatTokenResponse!
+}
+​
+type Event {
+  id: ID!
+  title: String!
+  link: String!
+  description: String!
+  venueName: String!
+  venueLocation: String!
+  venueWebsite: String!
+  startDate: String!
+  endDate: String!
+  image: String
+  ageRestriction: String!
+  type: String!
+}
+​
+input CreateEventInput {
+  title: String!
+  link: String!
+  description: String!
+  vaenueName: String!
+  vaenueLocation: String!
+  vaenueWebsite: String!
+  startDate: String!
+  endDate: String!
+  image: String!
+  ageRestriction: String!
+  eventType: String!
+}
+​
+input GetEventsInput {
+  month: Int!
+  year: Int!
+}
+​
+type Notification {
+  id: ID!
+  title: String!
+  message: String!
+  targetUserIds: [Int!]!
+}
+​
+type Forum {
+  id: Int!
+  title: String!
+  description: String
+  image: String!
+  posts: [Post]
+}
+​
+type Post {
+  id: Int!
+  title: String!
+  content: String!
+  user: User!
+  comments: [Comment]
+  commentsCount: Int!
+}
+​
+type Comment {
+  id: Int!
+  text: String!
+  user: User!
+  replies: [Reply]
+}
+​
+type Reply {
+  id: Int!
+  text: String!
+  user: User!
+}
+​
+type News {
+  id: ID!
+  date: String!
+  title: String!
+  image: String!
+  shortDescription: String!
+  longDescription: String!
+}
+​
+type CreateChatTokenResponse {
+  token: String!
+}
+​
+type Notifications {
+  id: ID!
+  message: String!
+  read: Boolean!
+  title: String!
+}
